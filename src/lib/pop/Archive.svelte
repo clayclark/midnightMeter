@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte'
+  import { flip } from 'svelte/animate'
   import { fade, slide } from 'svelte/transition'
   import { cubicOut } from 'svelte/easing'
   import Meter from '$lib/components/Meter.svelte'
@@ -231,7 +232,7 @@
   </div>
 
   <ol class="rows">
-    {#each results as rating, index (`${format}-${sort}-${rating.id}`)}
+    {#each results as rating, index (rating.id)}
       {@const average = getAverage(rating)}
       {@const open = openId === rating.id}
       {@const cols = columns(rating)}
@@ -241,7 +242,9 @@
         class="row"
         class:open
         data-rating-id={rating.id}
-        in:fade={{ duration: 160 }}
+        animate:flip={{ duration: 380, easing: cubicOut }}
+        in:fade={{ duration: 200 }}
+        out:fade={{ duration: 120 }}
       >
         <button class="row__summary" type="button" aria-expanded={open} on:click={(event) => toggle(rating, event)}>
           <span class="rank">{String(index + 1).padStart(2, '0')}</span>
