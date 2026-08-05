@@ -32,5 +32,5 @@ export function ratingCardPath(rating: Rating, mulligan: boolean): string {
 /** Portrait 1080x1920 — what the share buttons hand over. */
 export function ratingStoryPath(rating: Rating, mulligan: boolean): string {
   const base = `/ratings/${ratingSlug(rating)}`
-  return `${mulligan && hasMulligan(rating) ? `${base}/mulligan` : base}/story.png?v=3`
+  return `${mulligan && hasMulligan(rating) ? `${base}/mulligan` : base}/story.png?v=4`
 }

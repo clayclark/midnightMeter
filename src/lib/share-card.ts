@@ -34,6 +34,31 @@ function titleLines(title: string): string[] {
   return lines.slice(0, 2)
 }
 
+function displayText(
+  text: string | number,
+  {
+    x, y, size, fill, anchor = 'start', stroke, strokeWidth,
+  }: {
+    x: number
+    y: number
+    size: number
+    fill: string
+    anchor?: 'start' | 'middle' | 'end'
+    stroke?: string
+    strokeWidth?: number
+  },
+  font?: Font,
+): string {
+  const value = String(text)
+  if (!font) {
+    return `<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="Impact, Arial Black, sans-serif" font-size="${size}" fill="${fill}"${stroke ? ` stroke="${stroke}" stroke-width="${strokeWidth ?? 0}" paint-order="stroke"` : ''}>${xml(value)}</text>`
+  }
+
+  const width = font.getAdvanceWidth(value, size)
+  const startX = x - (anchor === 'end' ? width : anchor === 'middle' ? width / 2 : 0)
+  return `<path d="${font.getPath(value, startX, y, size).toPathData(1)}" fill="${fill}"${stroke ? ` stroke="${stroke}" stroke-width="${strokeWidth ?? 0}" paint-order="stroke" stroke-linejoin="round"` : ''}/>`
+}
+
 const railStart = 355
 const railWidth = 760
 const stopX = (stop: number) => railStart + ((stop - 1) / 11) * railWidth
@@ -89,6 +114,7 @@ function meterRow(
   host: (typeof HOSTS)[number],
   index: number,
   avatars?: AvatarData,
+  font?: Font,
 ): string {
   const score = rating.scores[host.key]
   const fillWidth = score === null || score < 1
@@ -104,8 +130,8 @@ function meterRow(
       ? `<image x="40" y="8" width="52" height="52" href="${avatar}" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatar-${host.key})"/>`
       : `<text x="66" y="45" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="30" fill="#101418">${host.initial}</text>`}
     <path d="M105 15h133l-15 39H105z" fill="#61169a" stroke="#8e31ce" stroke-width="3"/>
-    <text x="118" y="44" font-family="Impact, Arial Black, sans-serif" font-size="24" font-style="italic" fill="#fff3d6">${xml(host.short.toUpperCase())}</text>
-    <text x="268" y="52" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="48" fill="${COLORS[host.key]}">${score ?? '—'}</text>
+    ${displayText(host.short.toUpperCase(), { x: 118, y: 44, size: 24, fill: '#fff3d6' }, font)}
+    ${displayText(score ?? '—', { x: 268, y: 52, size: 48, fill: COLORS[host.key], anchor: 'middle' }, font)}
     <path d="M315 10l12 48M326 10l12 48" stroke="#ffd400" stroke-width="4" opacity=".72"/>
 
     <rect x="${railStart}" y="34" width="${railWidth}" height="10" rx="5" fill="#eef1f4" opacity=".9"/>
@@ -117,7 +143,7 @@ function meterRow(
         <circle cx="${x}" cy="39" r="8" fill="${lit ? SPECTRUM[stop - 1] : '#d9dee3'}" stroke="#101418" stroke-opacity=".28" stroke-width="2" ${lit ? 'filter="url(#glow)"' : ''}/>`
     }).join('')}
     <circle cx="${stopX(12)}" cy="39" r="24" fill="${score !== null && score >= 12 ? '#ffc46b' : '#eef1f4'}" stroke="#101418" stroke-width="5" ${score !== null && score >= 12 ? 'filter="url(#glow)"' : ''}/>
-    <text x="${stopX(12)}" y="47" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="24" fill="${score !== null && score >= 12 ? '#8a4305' : '#727b85'}">12</text>
+    ${displayText(12, { x: stopX(12), y: 47, size: 24, fill: score !== null && score >= 12 ? '#8a4305' : '#727b85', anchor: 'middle' }, font)}
   </g>`
 }
 
@@ -145,11 +171,11 @@ export function ratingCardSvg(
     <g stroke="#fff3d6" stroke-width="22" opacity=".12"><path d="M650 230 0 18M650 230 194 0M650 230 465 0M650 230 730 0M650 230 1018 0M650 230 1200 70M650 230 1200 290M650 230 1200 530M650 230 970 630M650 230 703 630M650 230 410 630M650 230 100 630M650 230 0 476M650 230 0 240"/></g>
     ${logotype(options.font)}
 
-    ${lines.map((line, index) => `<text x="48" y="${titleY + index * 68}" font-family="Impact, Arial Black, sans-serif" font-size="${titleSize}" letter-spacing="1" fill="#fff3d6" stroke="#101418" stroke-width="7" paint-order="stroke">${xml(line)}</text>`).join('')}
+    ${lines.map((line, index) => displayText(line, { x: 48, y: titleY + index * 68, size: titleSize, fill: '#fff3d6', stroke: '#101418', strokeWidth: 7 }, options.font)).join('')}
     <text x="52" y="216" font-family="Arial, sans-serif" font-size="19" font-weight="900" letter-spacing="4" fill="#101418">${xml(formatDate(rating.ratedAt).toUpperCase())}${xml(guestText)}</text>
 
 
-    ${HOSTS.map((host, index) => meterRow(rating, host, index, options.avatars)).join('')}
+    ${HOSTS.map((host, index) => meterRow(rating, host, index, options.avatars, options.font)).join('')}
   </svg>`
 }
 
@@ -185,6 +211,7 @@ function storyRow(
   index: number,
   top: number,
   avatars?: AvatarData,
+  font?: Font,
 ): string {
   const score = rating.scores[host.key]
   const fill = score === null || score < 1
@@ -199,8 +226,8 @@ function storyRow(
       ? `<image x="74" y="28" width="88" height="88" href="${avatar}" preserveAspectRatio="xMidYMid slice" clip-path="url(#story-avatar-${host.key})"/>`
       : `<text x="118" y="90" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="52" fill="#101418">${host.initial}</text>`}
     <path d="M186 40h232l-26 66H186z" fill="#61169a" stroke="#8e31ce" stroke-width="4"/>
-    <text x="206" y="90" font-family="Impact, Arial Black, sans-serif" font-size="40" font-style="italic" fill="#fff3d6">${xml(host.short.toUpperCase())}</text>
-    <text x="986" y="98" text-anchor="end" font-family="Impact, Arial Black, sans-serif" font-size="86" fill="${COLORS[host.key]}">${score ?? '—'}</text>
+    ${displayText(host.short.toUpperCase(), { x: 206, y: 90, size: 40, fill: '#fff3d6' }, font)}
+    ${displayText(score ?? '—', { x: 986, y: 98, size: 86, fill: COLORS[host.key], anchor: 'end' }, font)}
 
     <rect x="${storyRailStart}" y="150" width="${storyRailWidth}" height="13" rx="7" fill="#eef1f4" opacity=".9"/>
     <rect x="${storyRailStart}" y="150" width="${fill}" height="13" rx="7" fill="url(#spectrum)"/>
@@ -210,7 +237,7 @@ function storyRow(
       return `<circle cx="${x}" cy="157" r="10" fill="${lit ? SPECTRUM[stop - 1] : '#d9dee3'}" stroke="#101418" stroke-opacity=".28" stroke-width="2" ${lit ? 'filter="url(#glow)"' : ''}/>`
     }).join('')}
     <circle cx="${storyStopX(12)}" cy="157" r="30" fill="${score !== null && score >= 12 ? '#ffc46b' : '#eef1f4'}" stroke="#101418" stroke-width="6" ${score !== null && score >= 12 ? 'filter="url(#glow)"' : ''}/>
-    <text x="${storyStopX(12)}" y="167" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="28" fill="${score !== null && score >= 12 ? '#8a4305' : '#727b85'}">12</text>
+    ${displayText(12, { x: storyStopX(12), y: 167, size: 28, fill: score !== null && score >= 12 ? '#8a4305' : '#727b85', anchor: 'middle' }, font)}
   </g>`
 }
 
@@ -247,10 +274,10 @@ export function storyCardSvg(
     </g>
 
 
-    ${lines.map((line, index) => `<text x="64" y="${titleTop + index * (titleSize + 12)}" font-family="Impact, Arial Black, sans-serif" font-size="${titleSize}" letter-spacing="1" fill="#fff3d6" stroke="#101418" stroke-width="10" paint-order="stroke">${xml(line)}</text>`).join('')}
+    ${lines.map((line, index) => displayText(line, { x: 64, y: titleTop + index * (titleSize + 12), size: titleSize, fill: '#fff3d6', stroke: '#101418', strokeWidth: 10 }, options.font)).join('')}
     <text x="68" y="${titleTop + lines.length * (titleSize + 12) + 14}" font-family="Arial, sans-serif" font-size="30" font-weight="900" letter-spacing="6" fill="#101418">${xml(formatDate(rating.ratedAt).toUpperCase())}</text>
 
-    ${HOSTS.map((host, index) => storyRow(rating, host, index, metersTop, options.avatars)).join('')}
+    ${HOSTS.map((host, index) => storyRow(rating, host, index, metersTop, options.avatars, options.font)).join('')}
 
   </svg>`
 }
