@@ -1,5 +1,5 @@
 import {
-  HOSTS, MULLIGAN_BY_ID, MULLIGAN_MODEL, ORIGINAL_RATINGS, formatDate, getAverage,
+  MULLIGAN_BY_ID, MULLIGAN_MODEL, ORIGINAL_RATINGS,
 } from '$lib/data'
 import type { Rating } from '$lib/types'
 
@@ -32,20 +32,5 @@ export function ratingCardPath(rating: Rating, mulligan: boolean): string {
 /** Portrait 1080x1920 — what the share buttons hand over. */
 export function ratingStoryPath(rating: Rating, mulligan: boolean): string {
   const base = `/ratings/${ratingSlug(rating)}`
-  return `${mulligan && hasMulligan(rating) ? `${base}/mulligan` : base}/story.png?v=2`
-}
-
-export function ratingShareTitle(rating: Rating, mulligan: boolean): string {
-  const suffix = mulligan && hasMulligan(rating) ? ' — Mulligan' : ''
-  return `${rating.title}${suffix} — ${getAverage(rating).toFixed(2)}/12 | Midnight Meter`
-}
-
-export function ratingShareDescription(rating: Rating, mulligan: boolean): string {
-  const scores = HOSTS.flatMap((host) => {
-    const score = rating.scores[host.key]
-    return score === null ? [] : [`${host.short} ${score}`]
-  })
-  const guests = rating.guests.map((guest) => `${guest.name} ${guest.score}`)
-  const label = mulligan && hasMulligan(rating) ? 'Mulligan scores' : 'Scores'
-  return `${label}: ${[...scores, ...guests].join(' · ')}. Rated ${formatDate(rating.ratedAt)}.`
+  return `${mulligan && hasMulligan(rating) ? `${base}/mulligan` : base}/story.png?v=3`
 }

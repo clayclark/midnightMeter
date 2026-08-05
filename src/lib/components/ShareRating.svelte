@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import {
-    hasMulligan, ratingShareDescription, ratingShareTitle, ratingSlug, ratingStoryPath,
+    hasMulligan, ratingSlug, ratingStoryPath,
   } from '$lib/share'
   import type { Rating } from '$lib/types'
 
@@ -25,8 +25,6 @@
   /* Portrait: this is the image people actually post. The landscape card
      still exists, but only as the og:image for link unfurls. */
   $: cardPath = ratingStoryPath(rating, exactMulligan)
-  $: title = ratingShareTitle(rating, exactMulligan)
-  $: description = ratingShareDescription(rating, exactMulligan)
 
   function flash(message: string): void {
     clearTimeout(noteTimer)
@@ -63,7 +61,7 @@
       const file = await imageFile()
 
       if (canAttachFile(file)) {
-        await navigator.share({ files: [file], title, text: description })
+        await navigator.share({ files: [file] })
         flash('Card sent')
         return
       }

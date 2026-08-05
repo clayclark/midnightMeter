@@ -622,11 +622,10 @@
     .boy__picks b { font-size: 0.85rem; }
   }
 
-  /* Short windows — laptops in a half-height browser, phones in landscape, and
-     older 667px-tall handsets. Two rows of full cards plus the logotype cannot
-     coexist with the top of the ratings list in that space, so here (and only
-     here) the cards fall back to the headline numbers. */
-  @media (max-height: 720px) {
+  /* Short, wide windows — half-height laptops and landscape phones. Portrait
+     phones keep the complete host cards even when browser chrome makes the
+     reported viewport unusually short. */
+  @media (max-height: 720px) and (min-width: 701px) {
     .boy__dist,
     .boy__meta,
     .boy__picks { display: none; }

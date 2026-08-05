@@ -1,5 +1,6 @@
 import { HOSTS, formatDate } from '$lib/data'
 import type { HostKey, Rating } from '$lib/types'
+import type { Font } from 'opentype.js'
 
 export type AvatarData = Partial<Record<HostKey, string>>
 
@@ -44,27 +45,43 @@ const stopX = (stop: number) => railStart + ((stop - 1) / 11) * railWidth
  */
 function extruded(
   text: string,
-  { y, size, fill, depth, under }: { y: number; size: number; fill: string; depth: number; under?: string },
+  {
+    x = 0, y, size, fill, depth, under, anchor = 'start', font,
+  }: {
+    x?: number
+    y: number
+    size: number
+    fill: string
+    depth: number
+    under?: string
+    anchor?: 'start' | 'middle' | 'end'
+    font?: Font
+  },
 ): string {
   const layers: string[] = []
   const deepest = under ? depth + 2 : depth
+  const startX = font
+    ? x - (anchor === 'end' ? font.getAdvanceWidth(text, size) : anchor === 'middle' ? font.getAdvanceWidth(text, size) / 2 : 0)
+    : x
+
+  const layer = (layerX: number, layerY: number, color: string) => font
+    ? `<path d="${font.getPath(text, layerX, layerY, size).toPathData(1)}" fill="${color}"/>`
+    : `<text y="${layerY}" x="${layerX}" text-anchor="${anchor}" font-size="${size}" fill="${color}">${text}</text>`
 
   for (let step = deepest; step >= 1; step -= 1) {
-    layers.push(
-      `<text y="${y + step * 2}" x="${step * 2}" font-size="${size}" fill="${under && step > depth ? under : '#101418'}">${text}</text>`,
-    )
+    layers.push(layer(startX + step * 2, y + step * 2, under && step > depth ? under : '#101418'))
   }
-  layers.push(`<text y="${y}" x="0" font-size="${size}" fill="${fill}">${text}</text>`)
+  layers.push(layer(startX, y, fill))
   return layers.join('')
 }
 
 /* Right-aligned so it sits opposite the rating title, skewed the same -4° as
    the masthead on the site. */
-const logotype = `<g transform="translate(1152 80) skewY(-4)" text-anchor="end"
-    font-family="Impact, Arial Narrow Bold, Arial Black, sans-serif" letter-spacing="1">
-  ${extruded('THE', { y: 0, size: 34, fill: '#fff3d6', depth: 5 })}
-  ${extruded('MIDNIGHT', { y: 52, size: 64, fill: '#fff3d6', depth: 5 })}
-  ${extruded('METER', { y: 100, size: 54, fill: '#ffd400', depth: 5, under: '#e6007e' })}
+const logotype = (font?: Font) => `<g transform="translate(1152 80) skewY(-4)"
+    font-family="Anton, sans-serif" letter-spacing="1">
+  ${extruded('THE', { y: 0, size: 34, fill: '#fff3d6', depth: 5, anchor: 'end', font })}
+  ${extruded('MIDNIGHT', { y: 52, size: 64, fill: '#fff3d6', depth: 5, anchor: 'end', font })}
+  ${extruded('METER', { y: 100, size: 54, fill: '#ffd400', depth: 5, under: '#e6007e', anchor: 'end', font })}
 </g>`
 
 function meterRow(
@@ -106,7 +123,7 @@ function meterRow(
 
 export function ratingCardSvg(
   rating: Rating,
-  options: { mulligan: boolean; avatars?: AvatarData } = { mulligan: false },
+  options: { mulligan: boolean; avatars?: AvatarData; font?: Font } = { mulligan: false },
 ): string {
   const lines = titleLines(rating.title)
   const titleSize = lines.some((line) => line.length > 26) ? 54 : 62
@@ -126,7 +143,7 @@ export function ratingCardSvg(
     <rect width="1200" height="630" fill="url(#bg)"/>
     <rect width="1200" height="630" fill="url(#dots)"/>
     <g stroke="#fff3d6" stroke-width="22" opacity=".12"><path d="M650 230 0 18M650 230 194 0M650 230 465 0M650 230 730 0M650 230 1018 0M650 230 1200 70M650 230 1200 290M650 230 1200 530M650 230 970 630M650 230 703 630M650 230 410 630M650 230 100 630M650 230 0 476M650 230 0 240"/></g>
-    ${logotype}
+    ${logotype(options.font)}
 
     ${lines.map((line, index) => `<text x="48" y="${titleY + index * 68}" font-family="Impact, Arial Black, sans-serif" font-size="${titleSize}" letter-spacing="1" fill="#fff3d6" stroke="#101418" stroke-width="7" paint-order="stroke">${xml(line)}</text>`).join('')}
     <text x="52" y="216" font-family="Arial, sans-serif" font-size="19" font-weight="900" letter-spacing="4" fill="#101418">${xml(formatDate(rating.ratedAt).toUpperCase())}${xml(guestText)}</text>
@@ -199,7 +216,7 @@ function storyRow(
 
 export function storyCardSvg(
   rating: Rating,
-  options: { mulligan: boolean; avatars?: AvatarData } = { mulligan: false },
+  options: { mulligan: boolean; avatars?: AvatarData; font?: Font } = { mulligan: false },
 ): string {
   const lines = storyTitleLines(rating.title)
   const titleSize = lines.some((line) => line.length > 14) ? 84 : 96
@@ -222,11 +239,11 @@ export function storyCardSvg(
          only thing anyone reads before the scores -->
     <!-- centred; nudged 7px left because the extrusion layers all offset right,
          so a true centre would read as leaning -->
-    <g transform="translate(533 200) skewY(-4)" text-anchor="middle"
-        font-family="Impact, Arial Narrow Bold, Arial Black, sans-serif" letter-spacing="2">
-      ${extruded('THE', { y: 0, size: 62, fill: '#fff3d6', depth: 7 })}
-      ${extruded('MIDNIGHT', { y: 96, size: 116, fill: '#fff3d6', depth: 7 })}
-      ${extruded('METER', { y: 186, size: 98, fill: '#ffd400', depth: 7, under: '#e6007e' })}
+    <g transform="translate(290 200) skewY(-4)"
+        font-family="Anton, sans-serif" letter-spacing="2">
+      ${extruded('THE', { x: 22, y: 0, size: 62, fill: '#fff3d6', depth: 7, font: options.font })}
+      ${extruded('MIDNIGHT', { y: 96, size: 116, fill: '#fff3d6', depth: 7, font: options.font })}
+      ${extruded('METER', { x: 108, y: 186, size: 98, fill: '#ffd400', depth: 7, under: '#e6007e', font: options.font })}
     </g>
 
 

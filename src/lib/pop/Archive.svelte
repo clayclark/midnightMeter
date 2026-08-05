@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte'
-  import { flip } from 'svelte/animate'
-  import { fade, slide } from 'svelte/transition'
+  import { slide } from 'svelte/transition'
   import { cubicOut } from 'svelte/easing'
   import Meter from '$lib/components/Meter.svelte'
   import ShareRating from '$lib/components/ShareRating.svelte'
@@ -11,7 +10,7 @@
     HOSTS, MULLIGAN_BY_ID, mulliganSourceHref, ORIGINAL_RATINGS,
   } from '$lib/data'
   import { archiveModel, mulligansEnabled } from '$lib/mulligans'
-  import { prefersReducedMotion, reveal, stuck } from '$lib/motion'
+  import { prefersReducedMotion, stuck } from '$lib/motion'
   import type { FormatFilter, Rating, SortMode } from '$lib/types'
 
   export let initialOpenId: string | null = null
@@ -147,31 +146,26 @@
        The score-model switch lives in the hero, where you can watch it work. -->
   <div class="setup">
     <div class="setup__filters">
-      <div class="chips" role="group" aria-label="Filter by type">
-        {#each formats as value}
-          <button
-            type="button"
-            class:on={format === value}
-            aria-pressed={format === value}
-            on:click={() => (format = value)}
-          >{value}</button>
-        {/each}
+      <div class="control-group">
+        <span class="control-label">Show</span>
+        <div class="chips" role="group" aria-label="Filter by type">
+          {#each formats as value}
+            <button
+              type="button"
+              class:on={format === value}
+              aria-pressed={format === value}
+              on:click={() => (format = value)}
+            >{value}</button>
+          {/each}
+        </div>
       </div>
 
-      <div class="chips chips--sort" role="group" aria-label="Sort ratings">
-        {#each sorts as option}
-          <button
-            type="button"
-            class:on={sort === option.value}
-            aria-pressed={sort === option.value}
-            on:click={() => (sort = option.value)}
-          >{option.label}</button>
-        {/each}
-      </div>
-
-      <select class="sort-mobile" bind:value={sort} aria-label="Sort ratings">
-        {#each sorts as option}<option value={option.value}>{option.label}</option>{/each}
-      </select>
+      <label class="sort-field">
+        <span class="control-label">Sort</span>
+        <select bind:value={sort} aria-label="Sort ratings">
+          {#each sorts as option}<option value={option.value}>{option.label}</option>{/each}
+        </select>
+      </label>
     </div>
   </div>
 
@@ -212,10 +206,6 @@
         class="row"
         class:open
         data-rating-id={rating.id}
-        animate:flip={{ duration: 380, easing: cubicOut }}
-        in:fade={{ duration: 200 }}
-        out:fade={{ duration: 120 }}
-        use:reveal
       >
         <button class="row__summary" type="button" aria-expanded={open} on:click={(event) => toggle(rating, event)}>
           <span class="rank">{String(index + 1).padStart(2, '0')}</span>
@@ -339,7 +329,22 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.7rem 1rem;
+  }
+
+  .control-group,
+  .sort-field {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .control-label {
+    color: color-mix(in srgb, var(--cream) 66%, transparent);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
   .controls {
@@ -473,7 +478,20 @@
 
   .count strong { color: var(--magenta-on-cream); font-size: 1.1rem; }
 
-  .sort-mobile { display: none; }
+  .sort-field select {
+    min-height: 2.25rem;
+    padding: 0.38rem 2.2rem 0.38rem 0.7rem;
+    border: 2px solid color-mix(in srgb, var(--cream) 48%, transparent);
+    border-radius: 4px;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
 
   /* --- rows --- */
   .rows {
@@ -802,25 +820,17 @@
     /* the sticky bar is one row on phones: search plus the live count */
     .search { flex: 1 1 auto; padding-block: 0.4rem; }
     .setup__filters { flex: 1 1 100%; justify-content: space-between; }
+    .control-group,
+    .sort-field {
+      display: grid;
+      gap: 0.2rem;
+    }
     .chips button { padding: 0.4rem 0.6rem; font-size: 0.72rem; }
     /* number only — the word would wrap the bar onto a second line */
     .count { padding-right: 0; font-size: 0.7rem; }
     .count span { display: none; }
-    .chips--sort { display: none; }
-    .sort-mobile {
-      display: block;
-      padding: 0.4rem 0.45rem;
-      border: 2px solid var(--ink);
-      border-radius: 4px;
-      background: #fff;
-      /* it sits on the dark ground now, so it can't inherit the cream text */
-      color: var(--ink);
-      font-family: var(--font-ui);
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
+    .control-label { font-size: 0.62rem; }
+    .sort-field select { padding-right: 1.8rem; font-size: 0.72rem; }
 
     .row__summary {
       grid-template-columns: 2.4rem minmax(0, 1fr) 3.6rem 2.4rem;
