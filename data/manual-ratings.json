@@ -1,0 +1,267 @@
+[
+  {
+    "id": "manual-spider-man-brand-new-day-2026-07-30",
+    "title": "Spider-Man: Brand New Day",
+    "ratedAt": "2026-07-30",
+    "scores": {
+      "van": 11,
+      "charles": 10,
+      "jomi": 11,
+      "steve": 10
+    },
+    "guests": [],
+    "rawText": "SPIDER-MAN: BRAND NEW DAY\n\nVan 11\nCharles 10\nJomi 11\nSteve 10",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 1:44:51."
+  },
+  {
+    "id": "manual-the-odyssey-2026-07-16",
+    "title": "The Odyssey",
+    "ratedAt": "2026-07-16",
+    "scores": {
+      "van": 10,
+      "charles": 10,
+      "jomi": 10,
+      "steve": 10
+    },
+    "guests": [],
+    "rawText": "THE ODYSSEY\n\nVan 10\nCharles 10\nJomi 10\nSteve 10",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 1:20:15."
+  },
+  {
+    "id": "manual-supergirl-2026-06-26",
+    "title": "Supergirl",
+    "ratedAt": "2026-06-26",
+    "scores": {
+      "van": 5,
+      "charles": 4,
+      "jomi": 4,
+      "steve": 5
+    },
+    "guests": [],
+    "rawText": "SUPERGIRL\n\nVan 5\nCharles 4\nJomi 4\nSteve 5",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 1:17:36."
+  },
+  {
+    "id": "manual-disclosure-day-2026-06-12",
+    "title": "Disclosure Day",
+    "ratedAt": "2026-06-12",
+    "scores": {
+      "van": 5,
+      "charles": 6,
+      "jomi": 5,
+      "steve": 5
+    },
+    "guests": [],
+    "rawText": "DISCLOSURE DAY\n\nVan 5\nCharles 6\nJomi 5\nSteve 5",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 1:12:30."
+  },
+  {
+    "id": "manual-masters-of-the-universe-2026-06-05",
+    "title": "Masters of the Universe",
+    "ratedAt": "2026-06-05",
+    "scores": {
+      "van": 9,
+      "charles": 2,
+      "jomi": null,
+      "steve": 6
+    },
+    "guests": [
+      {
+        "name": "Rob Mahoney",
+        "score": 6
+      }
+    ],
+    "rawText": "MASTERS OF THE UNIVERSE\n\nRob Mahoney 6\nVan 9\nCharles 2\nSteve 6",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 1:11:24. Jomi was not present."
+  },
+  {
+    "id": "manual-the-mandalorian-and-grogu-2026-05-22",
+    "title": "The Mandalorian and Grogu",
+    "ratedAt": "2026-05-22",
+    "scores": {
+      "van": 8,
+      "charles": 6,
+      "jomi": 8,
+      "steve": 7
+    },
+    "guests": [],
+    "rawText": "THE MANDALORIAN AND GROGU\n\nVan 8\nCharles 6\nJomi 8\nSteve 7",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 1:21:38."
+  },
+  {
+    "id": "manual-the-boys-series-finale-2026-05-21",
+    "title": "The Boys Series Finale",
+    "ratedAt": "2026-05-21",
+    "scores": {
+      "van": 9,
+      "charles": 8,
+      "jomi": 9,
+      "steve": 8
+    },
+    "guests": [],
+    "rawText": "THE BOYS SERIES FINALE\n\nVan 9\nCharles 8\nJomi 9\nSteve 8",
+    "archiveUrl": null,
+    "note": "Podcast source; the scoring segment begins at 1:24:10. This score is for the series finale episode."
+  },
+  {
+    "id": "manual-the-boys-final-season-2026-05-21",
+    "title": "The Boys Final Season",
+    "ratedAt": "2026-05-21",
+    "scores": {
+      "van": 8,
+      "charles": 4,
+      "jomi": 7,
+      "steve": 7
+    },
+    "guests": [],
+    "rawText": "THE BOYS FINAL SEASON\n\nVan 8\nCharles 4\nJomi 7\nSteve 7",
+    "archiveUrl": null,
+    "note": "Podcast source; the three-part scoring segment begins at 1:24:10. This score is for the final season as a whole."
+  },
+  {
+    "id": "manual-the-boys-entire-series-2026-05-21",
+    "title": "The Boys Entire Series",
+    "ratedAt": "2026-05-21",
+    "scores": {
+      "van": 11,
+      "charles": 8,
+      "jomi": 10,
+      "steve": 10
+    },
+    "guests": [],
+    "rawText": "THE BOYS ENTIRE SERIES\n\nVan 11\nCharles 8\nJomi 10\nSteve 10",
+    "archiveUrl": null,
+    "note": "Podcast source; the three-part scoring segment begins at 1:24:10. This score is for the complete series."
+  },
+  {
+    "id": "manual-mortal-kombat-ii-2026-05-12",
+    "title": "Mortal Kombat II",
+    "ratedAt": "2026-05-12",
+    "scores": {
+      "van": 6,
+      "charles": 3,
+      "jomi": 6,
+      "steve": 4
+    },
+    "guests": [],
+    "rawText": "MORTAL KOMBAT II\n\nVan 6\nCharles 3\nJomi 6\nSteve 4",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 55:36."
+  },
+  {
+    "id": "manual-the-punisher-one-last-kill-2026-05-12",
+    "title": "The Punisher: One Last Kill",
+    "ratedAt": "2026-05-12",
+    "scores": {
+      "van": 9,
+      "charles": 7,
+      "jomi": 8,
+      "steve": 9
+    },
+    "guests": [],
+    "rawText": "THE PUNISHER: ONE LAST KILL\n\nVan 9\nCharles 7\nJomi 8\nSteve 9",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 37:57."
+  },
+  {
+    "id": "manual-daredevil-born-again-s2-2026-05-06",
+    "title": "Daredevil: Born Again S2",
+    "ratedAt": "2026-05-06",
+    "scores": {
+      "van": 8,
+      "charles": 6,
+      "jomi": 7,
+      "steve": 7
+    },
+    "guests": [],
+    "rawText": "DAREDEVIL: BORN AGAIN S2\n\nVan 8\nCharles 6\nJomi 7\nSteve 7",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 1:23:21."
+  },
+  {
+    "id": "manual-michael-2026-04-24",
+    "title": "Michael",
+    "ratedAt": "2026-04-24",
+    "scores": {
+      "van": 3,
+      "charles": 3,
+      "jomi": 3,
+      "steve": 3
+    },
+    "guests": [],
+    "rawText": "MICHAEL\n\nVan 3\nCharles 3\nJomi 3\nSteve 3",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 59:50."
+  },
+  {
+    "id": "manual-the-super-mario-galaxy-movie-2026-04-03",
+    "title": "The Super Mario Galaxy Movie",
+    "ratedAt": "2026-04-03",
+    "scores": {
+      "van": 6,
+      "charles": 3,
+      "jomi": 6,
+      "steve": null
+    },
+    "guests": [
+      {
+        "name": "Rob Mahoney",
+        "score": 4
+      }
+    ],
+    "rawText": "THE SUPER MARIO GALAXY MOVIE\n\nRob Mahoney 4\nVan 6\nCharles 3\nJomi 6",
+    "archiveUrl": null,
+    "note": "Podcast source; rating segment begins at 48:25. Steve was not present."
+  },
+  {
+    "id": "manual-x-men-97-season-1-2024-05-15",
+    "title": "X-Men '97 (Season 1)",
+    "ratedAt": "2024-05-15",
+    "scores": {
+      "van": 12,
+      "charles": 6,
+      "jomi": 12,
+      "steve": 11
+    },
+    "guests": [],
+    "rawText": "X-MEN '97 (SEASON 1)\n\nVan 12\nCharles 6\nJomi 12\nSteve 11",
+    "archiveUrl": "https://www.theringer.com/podcasts/midnight-boys/2024/05/15/x-men-97-episode-10-instant-reactions-the-midnight-boys",
+    "note": "Podcast-only rating from the Season 1 finale discussion; the scoring segment begins at 1:15:24."
+  },
+  {
+    "id": "manual-invincible-season-2-2024-04-04",
+    "title": "Invincible (Season 2)",
+    "ratedAt": "2024-04-04",
+    "scores": {
+      "van": 8,
+      "charles": 5,
+      "jomi": 8,
+      "steve": 7
+    },
+    "guests": [],
+    "rawText": "INVINCIBLE (SEASON 2)\n\nVan 8\nCharles 5\nJomi 8\nSteve 7",
+    "archiveUrl": "https://www.theringer.com/podcasts/midnight-boys/2024/04/04/invincible-season-2-finale-shogun-episode-7-and-more-x-men-97-the-midnight-boys",
+    "note": "Podcast-only rating from the Season 2 finale discussion."
+  },
+  {
+    "id": "manual-oppenheimer-2023-07-21",
+    "title": "Oppenheimer",
+    "ratedAt": "2023-07-21",
+    "scores": {
+      "van": 10,
+      "charles": 8,
+      "jomi": 11,
+      "steve": null
+    },
+    "guests": [],
+    "rawText": "OPPENHEIMER\n\nVan 10\nCharles 8\nJomi 11",
+    "archiveUrl": null,
+    "note": "Original scores recapped during the 2023 Midnight Mulligans; Steve had not yet seen it."
+  }
+]

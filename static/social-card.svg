@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#21b8ae"/>
+      <stop offset="1" stop-color="#08716f"/>
+    </linearGradient>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#101418" opacity=".12"/>
+    </pattern>
+    <clipPath id="van"><circle cx="150" cy="501" r="53"/></clipPath>
+    <clipPath id="charles"><circle cx="450" cy="501" r="53"/></clipPath>
+    <clipPath id="jomi"><circle cx="750" cy="501" r="53"/></clipPath>
+    <clipPath id="steve"><circle cx="1050" cy="501" r="53"/></clipPath>
+    <filter id="shadow" x="-20%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="8" dy="9" stdDeviation="0" flood-color="#101418" flood-opacity=".72"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <g stroke="#fff3d6" stroke-width="25" opacity=".16">
+    <path d="M505 300 0 93M505 300 100 0M505 300 319 0M505 300 544 0M505 300 773 0M505 300 1022 0M505 300 1200 94M505 300 1200 268M505 300 1200 455M505 300 1084 630M505 300 823 630M505 300 578 630M505 300 343 630M505 300 103 630M505 300 0 503M505 300 0 302"/>
+  </g>
+
+  <path d="M0 0h1200v70H0z" fill="#101418"/>
+  <rect x="39" y="17" width="52" height="39" rx="6" fill="#ffd400" transform="rotate(-4 65 36)"/>
+  <text x="65" y="45" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="24" fill="#101418">MM</text>
+  <text x="109" y="43" font-family="Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="5" fill="#fff3d6">THE MIDNIGHT BOYS</text>
+
+  <!-- The same staggered, skewed three-line lockup used in the site hero. -->
+  <g filter="url(#shadow)" font-family="Impact, Arial Black, sans-serif" font-weight="900">
+    <text x="312" y="160" font-size="48" letter-spacing="1" fill="#fff3d6" transform="rotate(-4 312 160)">THE</text>
+    <text x="236" y="278" font-size="132" letter-spacing="1" fill="#fff3d6" transform="rotate(-4 236 278)">MIDNIGHT</text>
+    <text x="430" y="392" font-size="116" letter-spacing="1" fill="#e6007e" transform="rotate(-4 430 392)">METER</text>
+    <text x="418" y="380" font-size="116" letter-spacing="1" fill="#ffd400" transform="rotate(-4 418 380)">METER</text>
+  </g>
+
+  <g>
+    <circle cx="150" cy="501" r="60" fill="#22c7e8" stroke="#101418" stroke-width="8"/>
+    <image x="97" y="448" width="106" height="106" xlink:href="avatars/van.jpg" preserveAspectRatio="xMidYMid slice" clip-path="url(#van)"/>
+    <circle cx="450" cy="501" r="60" fill="#ff4da6" stroke="#101418" stroke-width="8"/>
+    <image x="397" y="448" width="106" height="106" xlink:href="avatars/charles.jpg" preserveAspectRatio="xMidYMid slice" clip-path="url(#charles)"/>
+    <circle cx="750" cy="501" r="60" fill="#46b93f" stroke="#101418" stroke-width="8"/>
+    <image x="697" y="448" width="106" height="106" xlink:href="avatars/jomi.jpg" preserveAspectRatio="xMidYMid slice" clip-path="url(#jomi)"/>
+    <circle cx="1050" cy="501" r="60" fill="#ffd400" stroke="#101418" stroke-width="8"/>
+    <image x="997" y="448" width="106" height="106" xlink:href="avatars/steve.jpg" preserveAspectRatio="xMidYMid slice" clip-path="url(#steve)"/>
+  </g>
+
+  <g font-family="Impact, Arial Black, sans-serif" font-size="23" letter-spacing="2" fill="#fff3d6">
+    <text x="150" y="594" text-anchor="middle">VAN</text>
+    <text x="450" y="594" text-anchor="middle">CHARLES</text>
+    <text x="750" y="594" text-anchor="middle">JOMI</text>
+    <text x="1050" y="594" text-anchor="middle">STEVE</text>
+  </g>
+</svg>

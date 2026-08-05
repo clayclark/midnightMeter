@@ -1,0 +1,239 @@
+import { HOSTS, formatDate } from '$lib/data'
+import type { HostKey, Rating } from '$lib/types'
+
+export type AvatarData = Partial<Record<HostKey, string>>
+
+const COLORS: Record<HostKey, string> = {
+  van: '#22c7e8',
+  charles: '#ff4da6',
+  jomi: '#46b93f',
+  steve: '#ffd400',
+}
+
+const SPECTRUM = [
+  '#ff8a75', '#ffd98a', '#ffe9a8', '#fbf0ad', '#e4f5b4', '#b6f0dc',
+  '#a7e9f2', '#bde3f7', '#d7c9f5', '#ecb9ec', '#f6a9d4', '#ffc46b',
+]
+
+const xml = (value: string | number) => String(value)
+  .replaceAll('&', '&amp;')
+  .replaceAll('<', '&lt;')
+  .replaceAll('>', '&gt;')
+  .replaceAll('"', '&quot;')
+
+function titleLines(title: string): string[] {
+  const words = title.toUpperCase().split(/\s+/)
+  const limit = title.length > 42 ? 23 : 29
+  const lines: string[] = []
+  for (const word of words) {
+    const current = lines.at(-1)
+    if (!current || (current.length + word.length + 1 > limit && lines.length < 2)) lines.push(word)
+    else lines[lines.length - 1] = `${current} ${word}`
+  }
+  return lines.slice(0, 2)
+}
+
+const railStart = 355
+const railWidth = 760
+const stopX = (stop: number) => railStart + ((stop - 1) / 11) * railWidth
+
+/**
+ * The site's logotype, rebuilt in SVG: CSS gets its extrusion from a stack of
+ * `text-shadow` offsets, which has no SVG equivalent, so each word is drawn
+ * once per layer from the deepest offset forward.
+ */
+function extruded(
+  text: string,
+  { y, size, fill, depth, under }: { y: number; size: number; fill: string; depth: number; under?: string },
+): string {
+  const layers: string[] = []
+  const deepest = under ? depth + 2 : depth
+
+  for (let step = deepest; step >= 1; step -= 1) {
+    layers.push(
+      `<text y="${y + step * 2}" x="${step * 2}" font-size="${size}" fill="${under && step > depth ? under : '#101418'}">${text}</text>`,
+    )
+  }
+  layers.push(`<text y="${y}" x="0" font-size="${size}" fill="${fill}">${text}</text>`)
+  return layers.join('')
+}
+
+/* Right-aligned so it sits opposite the rating title, skewed the same -4° as
+   the masthead on the site. */
+const logotype = `<g transform="translate(1152 80) skewY(-4)" text-anchor="end"
+    font-family="Impact, Arial Narrow Bold, Arial Black, sans-serif" letter-spacing="1">
+  ${extruded('THE', { y: 0, size: 34, fill: '#fff3d6', depth: 5 })}
+  ${extruded('MIDNIGHT', { y: 52, size: 64, fill: '#fff3d6', depth: 5 })}
+  ${extruded('METER', { y: 100, size: 54, fill: '#ffd400', depth: 5, under: '#e6007e' })}
+</g>`
+
+function meterRow(
+  rating: Rating,
+  host: (typeof HOSTS)[number],
+  index: number,
+  avatars?: AvatarData,
+): string {
+  const score = rating.scores[host.key]
+  const fillWidth = score === null || score < 1
+    ? 0
+    : Math.min(railWidth, ((Math.min(score, 12) - 1) / 11) * railWidth + 9)
+  const avatar = avatars?.[host.key]
+  const stops = Array.from({ length: 11 }, (_, offset) => offset + 1)
+
+  return `<g transform="translate(0 ${262 + index * 78})">
+    <rect x="25" width="1150" height="68" rx="7" fill="#151a1f" stroke="#101418" stroke-width="5"/>
+    <circle cx="66" cy="34" r="28" fill="#fff3d6" stroke="${COLORS[host.key]}" stroke-width="5"/>
+    ${avatar
+      ? `<image x="40" y="8" width="52" height="52" href="${avatar}" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatar-${host.key})"/>`
+      : `<text x="66" y="45" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="30" fill="#101418">${host.initial}</text>`}
+    <path d="M105 15h133l-15 39H105z" fill="#61169a" stroke="#8e31ce" stroke-width="3"/>
+    <text x="118" y="44" font-family="Impact, Arial Black, sans-serif" font-size="24" font-style="italic" fill="#fff3d6">${xml(host.short.toUpperCase())}</text>
+    <text x="268" y="52" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="48" fill="${COLORS[host.key]}">${score ?? '—'}</text>
+    <path d="M315 10l12 48M326 10l12 48" stroke="#ffd400" stroke-width="4" opacity=".72"/>
+
+    <rect x="${railStart}" y="34" width="${railWidth}" height="10" rx="5" fill="#eef1f4" opacity=".9"/>
+    <rect x="${railStart}" y="34" width="${fillWidth}" height="10" rx="5" fill="url(#spectrum)"/>
+    ${stops.map((stop) => {
+      const lit = score !== null && score >= stop
+      const x = stopX(stop)
+      return `<text x="${x}" y="21" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="900" fill="${lit ? '#ffd400' : '#fff3d6'}" opacity="${lit ? 1 : .42}">${stop}</text>
+        <circle cx="${x}" cy="39" r="8" fill="${lit ? SPECTRUM[stop - 1] : '#d9dee3'}" stroke="#101418" stroke-opacity=".28" stroke-width="2" ${lit ? 'filter="url(#glow)"' : ''}/>`
+    }).join('')}
+    <circle cx="${stopX(12)}" cy="39" r="24" fill="${score !== null && score >= 12 ? '#ffc46b' : '#eef1f4'}" stroke="#101418" stroke-width="5" ${score !== null && score >= 12 ? 'filter="url(#glow)"' : ''}/>
+    <text x="${stopX(12)}" y="47" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="24" fill="${score !== null && score >= 12 ? '#8a4305' : '#727b85'}">12</text>
+  </g>`
+}
+
+export function ratingCardSvg(
+  rating: Rating,
+  options: { mulligan: boolean; avatars?: AvatarData } = { mulligan: false },
+): string {
+  const lines = titleLines(rating.title)
+  const titleSize = lines.some((line) => line.length > 26) ? 54 : 62
+  const titleY = lines.length === 1 ? 144 : 102
+  const guestText = rating.guests.length
+    ? ` · GUEST: ${rating.guests.map((guest) => `${guest.name.toUpperCase()} ${guest.score}`).join(' · ')}`
+    : ''
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22b8ae"/><stop offset="1" stop-color="#08716f"/></linearGradient>
+      <linearGradient id="spectrum" x1="0" y1="0" x2="1" y2="0">${SPECTRUM.map((color, index) => `<stop offset="${index / 11}" stop-color="${color}"/>`).join('')}</linearGradient>
+      <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#101418" opacity=".13"/></pattern>
+      <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      ${HOSTS.map((host) => `<clipPath id="avatar-${host.key}" clipPathUnits="userSpaceOnUse"><circle cx="66" cy="34" r="25"/></clipPath>`).join('')}
+    </defs>
+    <rect width="1200" height="630" fill="url(#bg)"/>
+    <rect width="1200" height="630" fill="url(#dots)"/>
+    <g stroke="#fff3d6" stroke-width="22" opacity=".12"><path d="M650 230 0 18M650 230 194 0M650 230 465 0M650 230 730 0M650 230 1018 0M650 230 1200 70M650 230 1200 290M650 230 1200 530M650 230 970 630M650 230 703 630M650 230 410 630M650 230 100 630M650 230 0 476M650 230 0 240"/></g>
+    ${logotype}
+
+    ${lines.map((line, index) => `<text x="48" y="${titleY + index * 68}" font-family="Impact, Arial Black, sans-serif" font-size="${titleSize}" letter-spacing="1" fill="#fff3d6" stroke="#101418" stroke-width="7" paint-order="stroke">${xml(line)}</text>`).join('')}
+    <text x="52" y="216" font-family="Arial, sans-serif" font-size="19" font-weight="900" letter-spacing="4" fill="#101418">${xml(formatDate(rating.ratedAt).toUpperCase())}${xml(guestText)}</text>
+
+
+    ${HOSTS.map((host, index) => meterRow(rating, host, index, options.avatars)).join('')}
+  </svg>`
+}
+
+/* ---------------------------------------------------------------------------
+   Portrait variant, 1080x1920 — Instagram / TikTok stories. Deliberately a
+   separate function rather than a responsive version of the landscape card:
+   at 9:16 the four meters want to stack tall and the logotype wants the top,
+   which is a different composition, not a reflow. The landscape card stays
+   as-is because it is what `og:image` serves to link unfurls.
+--------------------------------------------------------------------------- */
+
+const STORY_W = 1080
+const STORY_H = 1920
+
+function storyTitleLines(title: string): string[] {
+  const words = title.toUpperCase().split(/\s+/)
+  const lines: string[] = []
+  for (const word of words) {
+    const current = lines.at(-1)
+    if (!current || (current.length + word.length + 1 > 17 && lines.length < 3)) lines.push(word)
+    else lines[lines.length - 1] = `${current} ${word}`
+  }
+  return lines.slice(0, 3)
+}
+
+const storyRailStart = 96
+const storyRailWidth = 810
+const storyStopX = (stop: number) => storyRailStart + ((stop - 1) / 11) * storyRailWidth
+
+function storyRow(
+  rating: Rating,
+  host: (typeof HOSTS)[number],
+  index: number,
+  top: number,
+  avatars?: AvatarData,
+): string {
+  const score = rating.scores[host.key]
+  const fill = score === null || score < 1
+    ? 0
+    : Math.min(storyRailWidth, ((Math.min(score, 12) - 1) / 11) * storyRailWidth + 11)
+  const avatar = avatars?.[host.key]
+
+  return `<g transform="translate(0 ${top + index * 236})">
+    <rect x="42" width="996" height="208" rx="16" fill="#151a1f" stroke="#101418" stroke-width="7"/>
+    <circle cx="118" cy="72" r="48" fill="#fff3d6" stroke="${COLORS[host.key]}" stroke-width="7"/>
+    ${avatar
+      ? `<image x="74" y="28" width="88" height="88" href="${avatar}" preserveAspectRatio="xMidYMid slice" clip-path="url(#story-avatar-${host.key})"/>`
+      : `<text x="118" y="90" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="52" fill="#101418">${host.initial}</text>`}
+    <path d="M186 40h232l-26 66H186z" fill="#61169a" stroke="#8e31ce" stroke-width="4"/>
+    <text x="206" y="90" font-family="Impact, Arial Black, sans-serif" font-size="40" font-style="italic" fill="#fff3d6">${xml(host.short.toUpperCase())}</text>
+    <text x="986" y="98" text-anchor="end" font-family="Impact, Arial Black, sans-serif" font-size="86" fill="${COLORS[host.key]}">${score ?? '—'}</text>
+
+    <rect x="${storyRailStart}" y="150" width="${storyRailWidth}" height="13" rx="7" fill="#eef1f4" opacity=".9"/>
+    <rect x="${storyRailStart}" y="150" width="${fill}" height="13" rx="7" fill="url(#spectrum)"/>
+    ${Array.from({ length: 11 }, (_, offset) => offset + 1).map((stop) => {
+      const lit = score !== null && score >= stop
+      const x = storyStopX(stop)
+      return `<circle cx="${x}" cy="157" r="10" fill="${lit ? SPECTRUM[stop - 1] : '#d9dee3'}" stroke="#101418" stroke-opacity=".28" stroke-width="2" ${lit ? 'filter="url(#glow)"' : ''}/>`
+    }).join('')}
+    <circle cx="${storyStopX(12)}" cy="157" r="30" fill="${score !== null && score >= 12 ? '#ffc46b' : '#eef1f4'}" stroke="#101418" stroke-width="6" ${score !== null && score >= 12 ? 'filter="url(#glow)"' : ''}/>
+    <text x="${storyStopX(12)}" y="167" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="28" fill="${score !== null && score >= 12 ? '#8a4305' : '#727b85'}">12</text>
+  </g>`
+}
+
+export function storyCardSvg(
+  rating: Rating,
+  options: { mulligan: boolean; avatars?: AvatarData } = { mulligan: false },
+): string {
+  const lines = storyTitleLines(rating.title)
+  const titleSize = lines.some((line) => line.length > 14) ? 84 : 96
+  const titleTop = 560
+  const metersTop = titleTop + lines.length * (titleSize + 12) + 96
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${STORY_W}" height="${STORY_H}" viewBox="0 0 ${STORY_W} ${STORY_H}">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22b8ae"/><stop offset="1" stop-color="#08716f"/></linearGradient>
+      <linearGradient id="spectrum" x1="0" y1="0" x2="1" y2="0">${SPECTRUM.map((color, index) => `<stop offset="${index / 11}" stop-color="${color}"/>`).join('')}</linearGradient>
+      <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.4" fill="#101418" opacity=".13"/></pattern>
+      <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      ${HOSTS.map((host) => `<clipPath id="story-avatar-${host.key}" clipPathUnits="userSpaceOnUse"><circle cx="118" cy="72" r="44"/></clipPath>`).join('')}
+    </defs>
+    <rect width="${STORY_W}" height="${STORY_H}" fill="url(#bg)"/>
+    <rect width="${STORY_W}" height="${STORY_H}" fill="url(#dots)"/>
+    <g stroke="#fff3d6" stroke-width="30" opacity=".1"><path d="M540 430 0 60M540 430 210 0M540 430 540 -40M540 430 900 0M540 430 1080 90M540 430 1080 520M540 430 1080 980M540 430 820 1920M540 430 540 1920M540 430 240 1920M540 430 0 980M540 430 0 520"/></g>
+
+    <!-- logotype centred and oversized: at arm's length on a phone this is the
+         only thing anyone reads before the scores -->
+    <!-- centred; nudged 7px left because the extrusion layers all offset right,
+         so a true centre would read as leaning -->
+    <g transform="translate(533 200) skewY(-4)" text-anchor="middle"
+        font-family="Impact, Arial Narrow Bold, Arial Black, sans-serif" letter-spacing="2">
+      ${extruded('THE', { y: 0, size: 62, fill: '#fff3d6', depth: 7 })}
+      ${extruded('MIDNIGHT', { y: 96, size: 116, fill: '#fff3d6', depth: 7 })}
+      ${extruded('METER', { y: 186, size: 98, fill: '#ffd400', depth: 7, under: '#e6007e' })}
+    </g>
+
+
+    ${lines.map((line, index) => `<text x="64" y="${titleTop + index * (titleSize + 12)}" font-family="Impact, Arial Black, sans-serif" font-size="${titleSize}" letter-spacing="1" fill="#fff3d6" stroke="#101418" stroke-width="10" paint-order="stroke">${xml(line)}</text>`).join('')}
+    <text x="68" y="${titleTop + lines.length * (titleSize + 12) + 14}" font-family="Arial, sans-serif" font-size="30" font-weight="900" letter-spacing="6" fill="#101418">${xml(formatDate(rating.ratedAt).toUpperCase())}</text>
+
+    ${HOSTS.map((host, index) => storyRow(rating, host, index, metersTop, options.avatars)).join('')}
+
+  </svg>`
+}

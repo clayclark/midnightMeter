@@ -1,0 +1,581 @@
+[
+  {
+    "ratingId": "1478417301816885264",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "9:21",
+    "changes": { "van": { "from": 2, "to": 8 } },
+    "note": "Van's Matrix reassessment became the show's recurring annual mulligan."
+  },
+  {
+    "ratingId": "1472276231408214030",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "18:41",
+    "changes": { "van": { "from": 9, "to": 8 }, "charles": { "from": 9, "to": 7 }, "jomi": { "from": 11, "to": 8 }, "steve": { "from": 11, "to": 8 } },
+    "note": null
+  },
+  {
+    "ratingId": "1491779015153430529",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "24:25",
+    "changes": { "steve": { "from": 6, "to": 4 } },
+    "note": null
+  },
+  {
+    "ratingId": "1500186673031880707",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "30:12",
+    "changes": { "van": { "from": 10, "to": 9 }, "charles": { "from": 10, "to": 8 }, "jomi": { "from": 10, "to": 9 }, "steve": { "from": 10, "to": 8 } },
+    "note": null
+  },
+  {
+    "ratingId": "1522643322145329156",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "35:38",
+    "changes": { "van": { "from": 8, "to": 5 }, "charles": { "from": 6, "to": 5 }, "jomi": { "from": 8, "to": 6 }, "steve": { "from": 7, "to": 5 } },
+    "note": null
+  },
+  {
+    "ratingId": "1522644266153091073",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "38:39",
+    "changes": { "charles": { "from": 7, "to": 6 }, "jomi": { "from": 8, "to": 7 } },
+    "note": null
+  },
+  {
+    "ratingId": "1539805521049419778",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "41:52",
+    "changes": { "van": { "from": 8, "to": 7 }, "jomi": { "from": 7, "to": 6 }, "steve": { "from": 7, "to": 6 } },
+    "note": null
+  },
+  {
+    "ratingId": "1545459007674286080",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "54:16",
+    "changes": { "van": { "from": 7, "to": 6 }, "charles": { "from": 7, "to": 6 }, "jomi": { "from": 9, "to": 6 }, "steve": { "from": 7, "to": 6 } },
+    "note": null
+  },
+  {
+    "ratingId": "1547607088985083910",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "1:00:59",
+    "changes": { "jomi": { "from": 7, "to": 5 } },
+    "note": null
+  },
+  {
+    "ratingId": "1584946519073263616",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "1:04:19",
+    "changes": { "charles": { "from": 6, "to": 5 } },
+    "note": null
+  },
+  {
+    "ratingId": "1590361299418222592",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "1:06:54",
+    "changes": { "van": { "from": 9, "to": 10 }, "jomi": { "from": 8, "to": 9 } },
+    "note": null
+  },
+  {
+    "ratingId": "1591559239360983040",
+    "revisedAt": "2022-12-21",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2022/12/21/the-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2022 Midnight Mulligans",
+    "timestamp": "1:11:13",
+    "changes": { "charles": { "from": 8, "to": 7 }, "steve": { "from": 8, "to": 7 } },
+    "note": null
+  },
+
+  {
+    "ratingId": "1611042473551200260",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "10:13",
+    "changes": { "van": { "from": 9, "to": 11 }, "steve": { "from": 6, "to": 5 } },
+    "note": null
+  },
+  {
+    "ratingId": "1626686579220664329",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "14:32",
+    "changes": { "charles": { "from": 5, "to": 3 }, "jomi": { "from": 7, "to": 6 }, "steve": { "from": 7, "to": 6 } },
+    "note": null
+  },
+  {
+    "ratingId": "1641464786503303171",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "19:08",
+    "changes": { "steve": { "from": 10, "to": 9 } },
+    "note": null
+  },
+  {
+    "ratingId": "1644358104358739969",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "21:08",
+    "changes": { "charles": { "from": 8, "to": 7 } },
+    "note": null
+  },
+  {
+    "ratingId": "1649502283871277056",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "23:04",
+    "changes": { "van": { "from": 7, "to": 5 }, "charles": { "from": 5, "to": 4 }, "jomi": { "from": 7, "to": 5 }, "steve": { "from": null, "to": 5 } },
+    "note": "Steve added a score after the original rating."
+  },
+  {
+    "ratingId": "1654707591073636354",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "27:50",
+    "changes": { "van": { "from": 11, "to": 12 }, "steve": { "from": 9, "to": 8 } },
+    "note": null
+  },
+  {
+    "ratingId": "1666598176889946112",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "43:02",
+    "changes": { "van": { "from": 1, "to": -1 } },
+    "note": null
+  },
+  {
+    "ratingId": "1670186239973109760",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "46:25",
+    "changes": { "van": { "from": 7, "to": 5 }, "charles": { "from": 3, "to": 2 }, "jomi": { "from": 5, "to": 4 }, "steve": { "from": 5, "to": 3 } },
+    "note": null
+  },
+  {
+    "ratingId": "1679490041717100544",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "48:52",
+    "changes": { "van": { "from": 7, "to": 6 }, "charles": { "from": 8, "to": 7 } },
+    "note": null
+  },
+  {
+    "ratingId": "manual-oppenheimer-2023-07-21",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "1:01:49",
+    "changes": { "charles": { "from": 8, "to": 9 }, "steve": { "from": null, "to": 8 } },
+    "note": "Steve supplied his first score during the mulligans episode."
+  },
+  {
+    "ratingId": "1684951605714567168",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "1:09:04",
+    "changes": { "van": { "from": 5, "to": 3 }, "charles": { "from": 4, "to": 2 }, "jomi": { "from": 5, "to": 2 }, "steve": { "from": 5, "to": 3 } },
+    "note": null
+  },
+  {
+    "ratingId": "1688933181502738432",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "1:12:45",
+    "changes": { "van": { "from": 9, "to": 10 }, "charles": { "from": 8, "to": 9 } },
+    "note": null
+  },
+  {
+    "ratingId": "1709571928170901571",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "1:15:06",
+    "changes": { "charles": { "from": 6, "to": 4 }, "jomi": { "from": 7, "to": 6 } },
+    "note": null
+  },
+  {
+    "ratingId": "1724135303521210528",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "1:22:18",
+    "changes": { "charles": { "from": 5, "to": 3 } },
+    "note": null
+  },
+  {
+    "ratingId": "1732818799143932124",
+    "revisedAt": "2023-12-27",
+    "sourceUrl": "https://www.theringer.com/podcasts/midnight-boys/2023/12/27/the-2023-midnight-mulligans-the-midnight-boys",
+    "sourceLabel": "2023 Midnight Mulligans",
+    "timestamp": "1:25:28",
+    "changes": { "steve": { "from": null, "to": 8 } },
+    "note": "Steve supplied his halfway score during the mulligans episode."
+  },
+
+  {
+    "ratingId": "1843405737990766952",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "16:04",
+    "changes": { "charles": { "from": 4, "to": 3 }, "jomi": { "from": 2, "to": 1 } },
+    "note": null
+  },
+  {
+    "ratingId": "1774574018529493152",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "18:00",
+    "changes": { "charles": { "from": 2, "to": 4 } },
+    "note": null
+  },
+  {
+    "ratingId": "1863696925892968776",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "21:56",
+    "changes": { "charles": { "from": 7, "to": 6 }, "jomi": { "from": 7, "to": 6 }, "steve": { "from": 6, "to": 5 } },
+    "note": "Final scores are taken from the episode's recap."
+  },
+  {
+    "ratingId": "1794135075421819195",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "27:43",
+    "changes": { "charles": { "from": 7, "to": 8 } },
+    "note": null
+  },
+  {
+    "ratingId": "1816860761429250140",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "35:38",
+    "changes": { "charles": { "from": 6, "to": 3 }, "jomi": { "from": 8, "to": 7 }, "steve": { "from": null, "to": 5 } },
+    "note": "The mulligans episode recaps Steve's original score as 6; that original was absent from the X-derived archive."
+  },
+  {
+    "ratingId": "1777387781653717111",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "49:08",
+    "changes": { "van": { "from": 8, "to": 7 }, "charles": { "from": 8, "to": 7 }, "steve": { "from": 6, "to": 7 } },
+    "note": null
+  },
+  {
+    "ratingId": "1790072823303553345",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:10:51",
+    "changes": { "charles": { "from": 8, "to": 6 } },
+    "note": null
+  },
+  {
+    "ratingId": "1764660598174781606",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:12:17",
+    "changes": { "jomi": { "from": 11, "to": 12 } },
+    "note": null
+  },
+  {
+    "ratingId": "1761445817724923973",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:18:37",
+    "changes": { "jomi": { "from": 4, "to": 3 }, "steve": { "from": 5, "to": 3 } },
+    "note": null
+  },
+  {
+    "ratingId": "1748014630650171727",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:24:57",
+    "changes": { "van": { "from": 6, "to": 4 }, "charles": { "from": 6, "to": 3 }, "jomi": { "from": 6, "to": 4 }, "steve": { "from": 6, "to": 5 } },
+    "note": null
+  },
+  {
+    "ratingId": "1813917883656974783",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:28:00",
+    "changes": { "steve": { "from": 7, "to": 6 } },
+    "note": null
+  },
+  {
+    "ratingId": "manual-invincible-season-2-2024-04-04",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:29:13",
+    "changes": { "charles": { "from": 5, "to": 3 }, "jomi": { "from": 8, "to": 7 } },
+    "note": null
+  },
+  {
+    "ratingId": "1853840503231705109",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:31:25",
+    "changes": { "charles": { "from": null, "to": 4 }, "jomi": { "from": 9, "to": 10 } },
+    "note": "Charles supplied a retrospective score after not finishing the show originally."
+  },
+  {
+    "ratingId": "1856131782485082252",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:34:14",
+    "changes": { "charles": { "from": null, "to": 5 }, "steve": { "from": 9, "to": 10 } },
+    "note": "Charles supplied a retrospective score after not finishing the show originally."
+  },
+  {
+    "ratingId": "1820840015577883081",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:37:22",
+    "changes": { "charles": { "from": 8, "to": 9 } },
+    "note": null
+  },
+  {
+    "ratingId": "manual-x-men-97-season-1-2024-05-15",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:41:51",
+    "changes": { "charles": { "from": 6, "to": 5 } },
+    "note": null
+  },
+  {
+    "ratingId": "1783502297118429426",
+    "revisedAt": "2024-12-27",
+    "sourceUrl": "https://youtu.be/W99eomKqVV8",
+    "sourceLabel": "2024 Midnight Mulligans",
+    "timestamp": "1:46:11",
+    "changes": { "steve": { "from": 11, "to": 12 } },
+    "note": null
+  },
+
+  {
+    "ratingId": "1879903309357830568",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "10:13",
+    "changes": { "charles": { "from": 4, "to": 3 } },
+    "note": null
+  },
+  {
+    "ratingId": "1882463194054320343",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "13:56",
+    "changes": { "jomi": { "from": 11, "to": 10 }, "steve": { "from": 9, "to": 10 } },
+    "note": null
+  },
+  {
+    "ratingId": "1891508301591920732",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "18:04",
+    "changes": { "van": { "from": 5, "to": 6 }, "charles": { "from": 2, "to": 1 }, "jomi": { "from": 5, "to": 4 } },
+    "note": null
+  },
+  {
+    "ratingId": "1914397248252764408",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "34:58",
+    "changes": { "charles": { "from": 10, "to": 12 }, "jomi": { "from": 11, "to": 12 }, "steve": { "from": 10, "to": 12 } },
+    "note": null
+  },
+  {
+    "ratingId": "1919412609406677456",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "38:34",
+    "changes": { "van": { "from": 9, "to": 10 }, "steve": { "from": 8, "to": 9 } },
+    "note": null
+  },
+  {
+    "ratingId": "1927490593141452953",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "40:53",
+    "changes": { "charles": { "from": 5, "to": 4 } },
+    "note": null
+  },
+  {
+    "ratingId": "1928102154629206465",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "55:43",
+    "changes": { "charles": { "from": 6, "to": 4 }, "jomi": { "from": 7, "to": 10 }, "steve": { "from": 6, "to": 5 } },
+    "note": null
+  },
+  {
+    "ratingId": "1937594729748685223",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "58:03",
+    "changes": { "charles": { "from": 6, "to": 3 }, "steve": { "from": 7, "to": 8 } },
+    "note": null
+  },
+  {
+    "ratingId": "1940797503001317703",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "59:58",
+    "changes": { "van": { "from": 6, "to": 5 }, "charles": { "from": 5, "to": 2 }, "jomi": { "from": 5, "to": 4 } },
+    "note": null
+  },
+  {
+    "ratingId": "1942303005161971868",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:03:19",
+    "changes": { "van": { "from": 7, "to": 8 }, "jomi": { "from": 7, "to": 6 } },
+    "note": null
+  },
+  {
+    "ratingId": "1942304177268617637",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:05:37",
+    "changes": { "van": { "from": 9, "to": 11 }, "charles": { "from": 8, "to": 9 }, "steve": { "from": null, "to": 9 } },
+    "note": "Steve supplied his first score during the mulligans episode."
+  },
+  {
+    "ratingId": "1943694852195041733",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:08:15",
+    "changes": { "charles": { "from": 8, "to": 5 } },
+    "note": null
+  },
+  {
+    "ratingId": "1948738266221383908",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:13:21",
+    "changes": { "charles": { "from": 8, "to": 7 }, "jomi": { "from": 7, "to": 8 }, "steve": { "from": 7, "to": 6 } },
+    "note": null
+  },
+  {
+    "ratingId": "1971222664237957613",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:17:37",
+    "changes": { "van": { "from": 8, "to": 7 }, "charles": { "from": 7, "to": 5 }, "jomi": { "from": 8, "to": 7 }, "steve": { "from": 8, "to": 7 } },
+    "note": null
+  },
+  {
+    "ratingId": "1973750727001698333",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:18:59",
+    "changes": { "van": { "from": 11, "to": 10 }, "charles": { "from": 8, "to": 6 } },
+    "note": null
+  },
+  {
+    "ratingId": "1973895335375413498",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:25:36",
+    "changes": { "charles": { "from": 11, "to": 9 }, "jomi": { "from": 10, "to": 8 } },
+    "note": null
+  },
+  {
+    "ratingId": "1978936966314958932",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:41:36",
+    "changes": { "van": { "from": 7, "to": 6 }, "jomi": { "from": 7, "to": 4 } },
+    "note": null
+  },
+  {
+    "ratingId": "1981122301442891824",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:41:43",
+    "changes": { "charles": { "from": 6, "to": 3 }, "jomi": { "from": 9, "to": 8 } },
+    "note": null
+  },
+  {
+    "ratingId": "1988740319828144385",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:44:26",
+    "changes": { "charles": { "from": 8, "to": 7 } },
+    "note": null
+  },
+  {
+    "ratingId": "1992654972018970898",
+    "revisedAt": "2025-12-31",
+    "sourceUrl": "https://youtu.be/tHazenM3sg4",
+    "sourceLabel": "2025 Midnight Mulligans",
+    "timestamp": "1:45:04",
+    "changes": { "van": { "from": 7, "to": 3 }, "steve": { "from": 7, "to": 6 } },
+    "note": null
+  }
+]

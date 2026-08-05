@@ -1,0 +1,25 @@
+{
+  "name": "midnight-meter",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.32.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "preview": "vite preview",
+    "import:archive": "node scripts/import-x-archive.mjs"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@sveltejs/adapter-auto": "latest",
+    "@sveltejs/kit": "latest",
+    "@sveltejs/vite-plugin-svelte": "latest",
+    "@types/node": "^26.1.2",
+    "svelte": "latest",
+    "svelte-check": "latest",
+    "typescript": "^6.0.3",
+    "vite": "latest"
+  }
+}

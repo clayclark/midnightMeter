@@ -1,0 +1,29 @@
+{
+  "1763612622346235919": {
+    "title": "Dune: Part One (Villeneuve, 2021)",
+    "scores": { "van": 10, "charles": 8, "jomi": 10, "steve": 9 },
+    "note": "Rewatch meter. Van moved from 7 to 10; Charles moved from 7 to 8."
+  },
+  "manualEntries": [
+    {
+      "id": "venom-the-last-dance-2024",
+      "title": "Venom: The Last Dance",
+      "ratedAt": "2024-11-04",
+      "scores": { "van": 6, "charles": 6, "jomi": 4, "steve": 5 },
+      "guests": [],
+      "rawText": "VENOM: THE LAST DANCE\n\nVan 6\nCharles 6\nJomi 4\nSteve 5",
+      "archiveUrl": "https://x.com/MidnightMeter",
+      "note": "Recovered from the unofficial profile timeline; its direct post URL was not exposed by the archive export."
+    },
+    {
+      "id": "dune-lynch-1984",
+      "title": "Dune (Lynch, 1984)",
+      "ratedAt": "2024-02-29",
+      "scores": { "van": 7, "charles": 4, "jomi": 7, "steve": 6 },
+      "guests": [],
+      "rawText": "DUNE (LYNCH 1984)\n\nVan 7\nCharles 4\nJomi 7\nSteve 6",
+      "archiveUrl": "https://x.com/MidnightMeter/status/1763612622346235919",
+      "note": "Shared in the same archive post as the Dune: Part One rewatch meter."
+    }
+  ]
+}
