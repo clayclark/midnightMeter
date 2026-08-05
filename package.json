@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "@fontsource/anton": "^5.3.0",
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
     "opentype.js": "^2.0.0"
   }
 }

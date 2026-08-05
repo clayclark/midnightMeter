@@ -22,22 +22,54 @@ const xml = (value: string | number) => String(value)
   .replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;')
 
-function titleLines(title: string): string[] {
-  const words = title.toUpperCase().split(/\s+/)
-  const limit = title.length > 42 ? 23 : 29
-  const lines: string[] = []
-  for (const word of words) {
-    const current = lines.at(-1)
-    if (!current || (current.length + word.length + 1 > limit && lines.length < 2)) lines.push(word)
-    else lines[lines.length - 1] = `${current} ${word}`
+type TitleLayout = { lines: string[]; size: number }
+
+/** Wrap against the actual bundled display font, not a character-count guess. */
+function titleLayout(
+  title: string,
+  {
+    font, sizes, maxWidth, maxLines,
+  }: { font?: Font; sizes: number[]; maxWidth: number; maxLines: number },
+): TitleLayout {
+  const words = title.toUpperCase().trim().split(/\s+/)
+  const measure = (value: string, size: number) => font
+    ? font.getAdvanceWidth(value, size)
+    : value.length * size * 0.52
+
+  for (const size of sizes) {
+    const lines: string[] = []
+    for (const word of words) {
+      const current = lines.at(-1)
+      const candidate = current ? `${current} ${word}` : word
+      if (!current || measure(candidate, size) <= maxWidth) {
+        if (current) lines[lines.length - 1] = candidate
+        else lines.push(word)
+      } else {
+        lines.push(word)
+      }
+    }
+
+    if (lines.length <= maxLines && lines.every((line) => measure(line, size) <= maxWidth)) {
+      return { lines, size }
+    }
   }
-  return lines.slice(0, 2)
+
+  // The archive has no unbroken words this wide, but keep a lossless fallback
+  // so an unexpected title is never silently truncated.
+  const size = sizes.at(-1) ?? 48
+  const lines = words.reduce<string[]>((result, word) => {
+    const current = result.at(-1)
+    if (!current || (result.length < maxLines && measure(`${current} ${word}`, size) > maxWidth)) result.push(word)
+    else result[result.length - 1] = `${current} ${word}`
+    return result
+  }, [])
+  return { lines, size }
 }
 
 function displayText(
   text: string | number,
   {
-    x, y, size, fill, anchor = 'start', stroke, strokeWidth,
+    x, y, size, fill, anchor = 'start', stroke, strokeWidth, opacity,
   }: {
     x: number
     y: number
@@ -46,17 +78,18 @@ function displayText(
     anchor?: 'start' | 'middle' | 'end'
     stroke?: string
     strokeWidth?: number
+    opacity?: number
   },
   font?: Font,
 ): string {
   const value = String(text)
   if (!font) {
-    return `<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="Impact, Arial Black, sans-serif" font-size="${size}" fill="${fill}"${stroke ? ` stroke="${stroke}" stroke-width="${strokeWidth ?? 0}" paint-order="stroke"` : ''}>${xml(value)}</text>`
+    return `<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="Impact, Arial Black, sans-serif" font-size="${size}" fill="${fill}"${opacity === undefined ? '' : ` opacity="${opacity}"`}${stroke ? ` stroke="${stroke}" stroke-width="${strokeWidth ?? 0}" paint-order="stroke"` : ''}>${xml(value)}</text>`
   }
 
   const width = font.getAdvanceWidth(value, size)
   const startX = x - (anchor === 'end' ? width : anchor === 'middle' ? width / 2 : 0)
-  return `<path d="${font.getPath(value, startX, y, size).toPathData(1)}" fill="${fill}"${stroke ? ` stroke="${stroke}" stroke-width="${strokeWidth ?? 0}" paint-order="stroke" stroke-linejoin="round"` : ''}/>`
+  return `<path d="${font.getPath(value, startX, y, size).toPathData(1)}" fill="${fill}"${opacity === undefined ? '' : ` opacity="${opacity}"`}${stroke ? ` stroke="${stroke}" stroke-width="${strokeWidth ?? 0}" paint-order="stroke" stroke-linejoin="round"` : ''}/>`
 }
 
 const railStart = 355
@@ -115,6 +148,7 @@ function meterRow(
   index: number,
   avatars?: AvatarData,
   font?: Font,
+  utilityFont?: Font,
 ): string {
   const score = rating.scores[host.key]
   const fillWidth = score === null || score < 1
@@ -128,7 +162,7 @@ function meterRow(
     <circle cx="66" cy="34" r="28" fill="#fff3d6" stroke="${COLORS[host.key]}" stroke-width="5"/>
     ${avatar
       ? `<image x="40" y="8" width="52" height="52" href="${avatar}" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatar-${host.key})"/>`
-      : `<text x="66" y="45" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="30" fill="#101418">${host.initial}</text>`}
+      : displayText(host.initial, { x: 66, y: 45, size: 30, fill: '#101418', anchor: 'middle' }, utilityFont)}
     <path d="M105 15h133l-15 39H105z" fill="#61169a" stroke="#8e31ce" stroke-width="3"/>
     ${displayText(host.short.toUpperCase(), { x: 118, y: 44, size: 24, fill: '#fff3d6' }, font)}
     ${displayText(score ?? '—', { x: 268, y: 52, size: 48, fill: COLORS[host.key], anchor: 'middle' }, font)}
@@ -139,7 +173,7 @@ function meterRow(
     ${stops.map((stop) => {
       const lit = score !== null && score >= stop
       const x = stopX(stop)
-      return `<text x="${x}" y="21" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="900" fill="${lit ? '#ffd400' : '#fff3d6'}" opacity="${lit ? 1 : .42}">${stop}</text>
+      return `${displayText(stop, { x, y: 21, size: 13, fill: lit ? '#ffd400' : '#fff3d6', anchor: 'middle', opacity: lit ? 1 : .42 }, utilityFont)}
         <circle cx="${x}" cy="39" r="8" fill="${lit ? SPECTRUM[stop - 1] : '#d9dee3'}" stroke="#101418" stroke-opacity=".28" stroke-width="2" ${lit ? 'filter="url(#glow)"' : ''}/>`
     }).join('')}
     <circle cx="${stopX(12)}" cy="39" r="24" fill="${score !== null && score >= 12 ? '#ffc46b' : '#eef1f4'}" stroke="#101418" stroke-width="5" ${score !== null && score >= 12 ? 'filter="url(#glow)"' : ''}/>
@@ -149,10 +183,14 @@ function meterRow(
 
 export function ratingCardSvg(
   rating: Rating,
-  options: { mulligan: boolean; avatars?: AvatarData; font?: Font } = { mulligan: false },
+  options: { mulligan: boolean; avatars?: AvatarData; font?: Font; utilityFont?: Font } = { mulligan: false },
 ): string {
-  const lines = titleLines(rating.title)
-  const titleSize = lines.some((line) => line.length > 26) ? 54 : 62
+  const { lines, size: titleSize } = titleLayout(rating.title, {
+    font: options.font,
+    sizes: [62, 58, 54, 50, 46],
+    maxWidth: 760,
+    maxLines: 2,
+  })
   const titleY = lines.length === 1 ? 144 : 102
   const guestText = rating.guests.length
     ? ` · GUEST: ${rating.guests.map((guest) => `${guest.name.toUpperCase()} ${guest.score}`).join(' · ')}`
@@ -172,10 +210,10 @@ export function ratingCardSvg(
     ${logotype(options.font)}
 
     ${lines.map((line, index) => displayText(line, { x: 48, y: titleY + index * 68, size: titleSize, fill: '#fff3d6', stroke: '#101418', strokeWidth: 7 }, options.font)).join('')}
-    <text x="52" y="216" font-family="Arial, sans-serif" font-size="19" font-weight="900" letter-spacing="4" fill="#101418">${xml(formatDate(rating.ratedAt).toUpperCase())}${xml(guestText)}</text>
+    ${displayText(`${formatDate(rating.ratedAt).toUpperCase()}${guestText}`, { x: 52, y: 216, size: 19, fill: '#101418' }, options.utilityFont)}
 
 
-    ${HOSTS.map((host, index) => meterRow(rating, host, index, options.avatars, options.font)).join('')}
+    ${HOSTS.map((host, index) => meterRow(rating, host, index, options.avatars, options.font, options.utilityFont)).join('')}
   </svg>`
 }
 
@@ -184,22 +222,12 @@ export function ratingCardSvg(
    separate function rather than a responsive version of the landscape card:
    at 9:16 the four meters want to stack tall and the logotype wants the top,
    which is a different composition, not a reflow. The landscape card stays
-   as-is because it is what `og:image` serves to link unfurls.
+   available as a 1200x630 export, while link unfurls use the site's one static
+   social image.
 --------------------------------------------------------------------------- */
 
 const STORY_W = 1080
 const STORY_H = 1920
-
-function storyTitleLines(title: string): string[] {
-  const words = title.toUpperCase().split(/\s+/)
-  const lines: string[] = []
-  for (const word of words) {
-    const current = lines.at(-1)
-    if (!current || (current.length + word.length + 1 > 17 && lines.length < 3)) lines.push(word)
-    else lines[lines.length - 1] = `${current} ${word}`
-  }
-  return lines.slice(0, 3)
-}
 
 const storyRailStart = 96
 const storyRailWidth = 810
@@ -212,6 +240,7 @@ function storyRow(
   top: number,
   avatars?: AvatarData,
   font?: Font,
+  utilityFont?: Font,
 ): string {
   const score = rating.scores[host.key]
   const fill = score === null || score < 1
@@ -224,7 +253,7 @@ function storyRow(
     <circle cx="118" cy="72" r="48" fill="#fff3d6" stroke="${COLORS[host.key]}" stroke-width="7"/>
     ${avatar
       ? `<image x="74" y="28" width="88" height="88" href="${avatar}" preserveAspectRatio="xMidYMid slice" clip-path="url(#story-avatar-${host.key})"/>`
-      : `<text x="118" y="90" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="52" fill="#101418">${host.initial}</text>`}
+      : displayText(host.initial, { x: 118, y: 90, size: 52, fill: '#101418', anchor: 'middle' }, utilityFont)}
     <path d="M186 40h232l-26 66H186z" fill="#61169a" stroke="#8e31ce" stroke-width="4"/>
     ${displayText(host.short.toUpperCase(), { x: 206, y: 90, size: 40, fill: '#fff3d6' }, font)}
     ${displayText(score ?? '—', { x: 986, y: 98, size: 86, fill: COLORS[host.key], anchor: 'end' }, font)}
@@ -243,10 +272,14 @@ function storyRow(
 
 export function storyCardSvg(
   rating: Rating,
-  options: { mulligan: boolean; avatars?: AvatarData; font?: Font } = { mulligan: false },
+  options: { mulligan: boolean; avatars?: AvatarData; font?: Font; utilityFont?: Font } = { mulligan: false },
 ): string {
-  const lines = storyTitleLines(rating.title)
-  const titleSize = lines.some((line) => line.length > 14) ? 84 : 96
+  const { lines, size: titleSize } = titleLayout(rating.title, {
+    font: options.font,
+    sizes: [96, 88, 80, 72, 64],
+    maxWidth: STORY_W - 128,
+    maxLines: 3,
+  })
   const titleTop = 560
   const metersTop = titleTop + lines.length * (titleSize + 12) + 96
 
@@ -275,9 +308,9 @@ export function storyCardSvg(
 
 
     ${lines.map((line, index) => displayText(line, { x: 64, y: titleTop + index * (titleSize + 12), size: titleSize, fill: '#fff3d6', stroke: '#101418', strokeWidth: 10 }, options.font)).join('')}
-    <text x="68" y="${titleTop + lines.length * (titleSize + 12) + 14}" font-family="Arial, sans-serif" font-size="30" font-weight="900" letter-spacing="6" fill="#101418">${xml(formatDate(rating.ratedAt).toUpperCase())}</text>
+    ${displayText(formatDate(rating.ratedAt).toUpperCase(), { x: 68, y: titleTop + lines.length * (titleSize + 12) + 14, size: 30, fill: '#101418' }, options.utilityFont)}
 
-    ${HOSTS.map((host, index) => storyRow(rating, host, index, metersTop, options.avatars, options.font)).join('')}
+    ${HOSTS.map((host, index) => storyRow(rating, host, index, metersTop, options.avatars, options.font, options.utilityFont)).join('')}
 
   </svg>`
 }

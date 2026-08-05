@@ -3,6 +3,6 @@
   <rect x="3" y="3" width="58" height="58" rx="11" fill="none" stroke="#fff3d6" stroke-width="2" opacity=".18"/>
   <g transform="rotate(-4 32 32)">
     <rect x="7" y="12" width="50" height="40" rx="6" fill="#ffd400"/>
-    <text x="32" y="42" text-anchor="middle" font-family="Impact, Arial Black, sans-serif" font-size="27" font-weight="900" letter-spacing="-1" fill="#101418">MM</text>
+    <path d="M17.08 42L12.88 42L12.88 18.8L19.95 18.8L21.9 32.94L23.84 18.8L30.97 18.8L30.97 42L26.73 42L26.73 25.28L24.06 42L19.9 42L17.08 25.28L17.08 42M37.22 42L33.03 42L33.03 18.8L40.09 18.8L42.05 32.94L43.98 18.8L51.12 18.8L51.12 42L46.87 42L46.87 25.28L44.21 42L40.04 42L37.22 25.28" fill="#101418"/>
   </g>
 </svg>

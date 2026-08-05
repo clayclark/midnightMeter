@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte'
-  import { slide } from 'svelte/transition'
+  import { fade, slide } from 'svelte/transition'
   import { cubicOut } from 'svelte/easing'
   import Meter from '$lib/components/Meter.svelte'
   import ShareRating from '$lib/components/ShareRating.svelte'
@@ -30,10 +30,23 @@
   ]
   const formats: FormatFilter[] = ['all', 'film', 'series']
 
-  $: normalizedQuery = query.trim().toLowerCase()
+  const normalizeSearch = (value: string) => value
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+
+  const matchesSearch = (title: string, search: string) => {
+    const normalizedTitle = normalizeSearch(title)
+    return normalizedTitle.includes(search)
+      || normalizedTitle.replaceAll(' ', '').includes(search.replaceAll(' ', ''))
+  }
+
+  $: normalizedQuery = normalizeSearch(query)
   $: results = $archiveModel.ratings
     .filter((rating) => format === 'all' || getFormat(rating.title) === format)
-    .filter((rating) => !normalizedQuery || rating.title.toLowerCase().includes(normalizedQuery))
+    .filter((rating) => !normalizedQuery || matchesSearch(rating.title, normalizedQuery))
     .toSorted((a, b) => {
       if (sort === 'highest') return getAverage(b) - getAverage(a)
       if (sort === 'lowest') return getAverage(a) - getAverage(b)
@@ -84,13 +97,20 @@
       event.preventDefault()
       searchInput.focus()
     }
-    if (event.key === 'Escape' && typing) searchInput.blur()
+    if (event.key === 'Escape' && event.target === searchInput) {
+      if (query) query = ''
+      else searchInput.blur()
+    }
   }
 
-  function reset() {
+  async function clearSearch() {
     query = ''
+    await tick()
+    searchInput.focus()
+  }
+
+  function showAllRatings() {
     format = 'all'
-    sort = 'newest'
   }
 
   const hostColor = (key: string) => `var(--host-${key})`
@@ -161,10 +181,15 @@
       </div>
 
       <label class="sort-field">
-        <span class="control-label">Sort</span>
-        <select bind:value={sort} aria-label="Sort ratings">
-          {#each sorts as option}<option value={option.value}>{option.label}</option>{/each}
-        </select>
+        <span class="control-label">Sort by</span>
+        <span class="select-shell">
+          <select bind:value={sort} aria-label="Sort ratings">
+            {#each sorts as option}<option value={option.value}>{option.label}</option>{/each}
+          </select>
+          <svg class="select-chevron" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+            <path d="m5 7 5 6 5-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" />
+          </svg>
+        </span>
       </label>
     </div>
   </div>
@@ -174,29 +199,39 @@
     <label class="search">
       <SearchIcon size={20} />
       <span class="sr-only">Search titles</span>
-      <input bind:this={searchInput} bind:value={query} type="search" placeholder="Search titles" />
+      <input
+        bind:this={searchInput}
+        bind:value={query}
+        type="search"
+        name="rating-search"
+        aria-label="Search titles"
+        autocomplete="off"
+        autocapitalize="none"
+        spellcheck="false"
+        placeholder="Search titles…"
+      />
       <!-- the shortcut hint gives way to the clear button once you have typed -->
       {#if query}
         <button
           type="button"
           class="search__clear"
           aria-label="Clear search"
-          on:click={() => { query = ''; searchInput.focus() }}
+          on:click={clearSearch}
         >
           <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true">
             <path d="M5 5 L15 15 M15 5 L5 15" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
           </svg>
         </button>
       {:else}
-        <kbd>/</kbd>
+        <kbd aria-hidden="true">/</kbd>
       {/if}
     </label>
 
-    <p class="count" aria-live="polite"><strong>{results.length}</strong> <span>results</span></p>
+    <p class="count" aria-live="polite" aria-atomic="true"><strong>{results.length}</strong> <span>{results.length === 1 ? 'result' : 'results'}</span></p>
   </div>
 
   <ol class="rows">
-    {#each results as rating, index (rating.id)}
+    {#each results as rating, index (`${format}-${sort}-${rating.id}`)}
       {@const average = getAverage(rating)}
       {@const open = openId === rating.id}
       {@const cols = columns(rating)}
@@ -206,6 +241,7 @@
         class="row"
         class:open
         data-rating-id={rating.id}
+        in:fade={{ duration: 160 }}
       >
         <button class="row__summary" type="button" aria-expanded={open} on:click={(event) => toggle(rating, event)}>
           <span class="rank">{String(index + 1).padStart(2, '0')}</span>
@@ -294,9 +330,14 @@
       </li>
     {:else}
       <li class="empty">
-        <strong>No signal.</strong>
-        <p>Nothing matches that. Try a different title or clear the filters.</p>
-        <button type="button" on:click={reset}>Clear filters</button>
+        <strong>No ratings found</strong>
+        {#if normalizedQuery}
+          <p>No titles match “{query.trim()}”. Try another search or clear it.</p>
+          <button type="button" on:click={clearSearch}>Clear search</button>
+        {:else}
+          <p>No ratings match this filter.</p>
+          <button type="button" on:click={showAllRatings}>Show all ratings</button>
+        {/if}
       </li>
     {/each}
   </ol>
@@ -480,7 +521,8 @@
 
   .sort-field select {
     min-height: 2.25rem;
-    padding: 0.38rem 2.2rem 0.38rem 0.7rem;
+    width: 100%;
+    padding: 0.38rem 2.4rem 0.38rem 0.7rem;
     border: 2px solid color-mix(in srgb, var(--cream) 48%, transparent);
     border-radius: 4px;
     background: var(--cream);
@@ -491,6 +533,22 @@
     letter-spacing: 0.09em;
     text-transform: uppercase;
     cursor: pointer;
+    appearance: none;
+  }
+
+  .select-shell {
+    position: relative;
+    display: block;
+    min-width: 8.8rem;
+    color: var(--ink);
+  }
+
+  .select-chevron {
+    position: absolute;
+    top: 50%;
+    right: 0.65rem;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
 
   /* --- rows --- */
@@ -819,6 +877,7 @@
 
     /* the sticky bar is one row on phones: search plus the live count */
     .search { flex: 1 1 auto; padding-block: 0.4rem; }
+    .search kbd { display: none; }
     .setup__filters { flex: 1 1 100%; justify-content: space-between; }
     .control-group,
     .sort-field {
@@ -830,7 +889,7 @@
     .count { padding-right: 0; font-size: 0.7rem; }
     .count span { display: none; }
     .control-label { font-size: 0.62rem; }
-    .sort-field select { padding-right: 1.8rem; font-size: 0.72rem; }
+    .sort-field select { font-size: 0.72rem; }
 
     .row__summary {
       grid-template-columns: 2.4rem minmax(0, 1fr) 3.6rem 2.4rem;

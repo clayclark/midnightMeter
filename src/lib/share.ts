@@ -26,11 +26,11 @@ export function ratingForView(rating: Rating, mulligan: boolean): Rating {
 
 export function ratingCardPath(rating: Rating, mulligan: boolean): string {
   const base = `/ratings/${ratingSlug(rating)}`
-  return `${mulligan && hasMulligan(rating) ? `${base}/mulligan` : base}/card.png?v=7`
+  return `${mulligan && hasMulligan(rating) ? `${base}/mulligan` : base}/card.png?v=8`
 }
 
 /** Portrait 1080x1920 — what the share buttons hand over. */
 export function ratingStoryPath(rating: Rating, mulligan: boolean): string {
   const base = `/ratings/${ratingSlug(rating)}`
-  return `${mulligan && hasMulligan(rating) ? `${base}/mulligan` : base}/story.png?v=4`
+  return `${mulligan && hasMulligan(rating) ? `${base}/mulligan` : base}/story.png?v=5`
 }
