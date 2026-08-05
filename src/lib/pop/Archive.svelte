@@ -430,6 +430,10 @@
 
   .search:focus-within { box-shadow: 0 0 0 3px var(--cyan); }
 
+  :global(html[data-input-modality='pointer']) .search:focus-within {
+    box-shadow: none;
+  }
+
   .search input {
     /* the label is roomy, but the input is the thing you tap (WCAG 2.5.8) */
     min-height: 24px;
@@ -437,7 +441,8 @@
     min-width: 0;
     border: 0;
     background: none;
-    font-size: 0.95rem;
+    /* iOS Safari zooms the viewport when a focused form control is <16px. */
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     outline: none;
@@ -889,7 +894,8 @@
     .count { padding-right: 0; font-size: 0.7rem; }
     .count span { display: none; }
     .control-label { font-size: 0.62rem; }
-    .sort-field select { font-size: 0.72rem; }
+    /* Keep every focusable form control above Safari's auto-zoom threshold. */
+    .sort-field select { font-size: 1rem; }
 
     .row__summary {
       grid-template-columns: 2.4rem minmax(0, 1fr) 3.6rem 2.4rem;

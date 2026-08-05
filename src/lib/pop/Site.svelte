@@ -12,7 +12,28 @@
   export let initialOpenId: string | null = null
   export let initialMulligans: boolean | undefined = undefined
 
-  onMount(() => initializeMulligans(initialMulligans))
+  onMount(() => {
+    initializeMulligans(initialMulligans)
+
+    const root = document.documentElement
+    const usePointerFocus = () => { root.dataset.inputModality = 'pointer' }
+    const useKeyboardFocus = (event: KeyboardEvent) => {
+      const typing = event.target instanceof HTMLElement
+        && event.target.matches('input, textarea, select, [contenteditable="true"]')
+      if (event.key === 'Tab' || (event.key === '/' && !typing)) {
+        root.dataset.inputModality = 'keyboard'
+      }
+    }
+
+    window.addEventListener('pointerdown', usePointerFocus, true)
+    window.addEventListener('keydown', useKeyboardFocus, true)
+
+    return () => {
+      window.removeEventListener('pointerdown', usePointerFocus, true)
+      window.removeEventListener('keydown', useKeyboardFocus, true)
+      delete root.dataset.inputModality
+    }
+  })
 </script>
 
 <div class="pop">
@@ -61,5 +82,14 @@
   .pop :global(select:focus-visible) {
     outline: 3px solid var(--yellow);
     outline-offset: 3px;
+  }
+
+  /* Safari can retain :focus-visible after a tap. Pointer interaction already
+     has pressed/selected feedback; reserve the outline for keyboard travel. */
+  :global(html[data-input-modality='pointer']) .pop :global(a:focus-visible),
+  :global(html[data-input-modality='pointer']) .pop :global(button:focus-visible),
+  :global(html[data-input-modality='pointer']) .pop :global(input:focus-visible),
+  :global(html[data-input-modality='pointer']) .pop :global(select:focus-visible) {
+    outline: none;
   }
 </style>
