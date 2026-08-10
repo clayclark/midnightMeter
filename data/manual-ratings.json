@@ -1,5 +1,20 @@
 [
   {
+    "id": "manual-house-of-the-dragon-season-3-2026-08-10",
+    "title": "House of the Dragon Season 3",
+    "ratedAt": "2026-08-10",
+    "scores": {
+      "van": 9,
+      "charles": 7,
+      "jomi": 9,
+      "steve": 8
+    },
+    "guests": [],
+    "rawText": "HOUSE OF THE DRAGON SEASON 3\n\nVan 9\nCharles 7\nJomi 9\nSteve 8",
+    "archiveUrl": null,
+    "note": "Ratings provided on the episode release date."
+  },
+  {
     "id": "manual-spider-man-brand-new-day-2026-07-30",
     "title": "Spider-Man: Brand New Day",
     "ratedAt": "2026-07-30",
