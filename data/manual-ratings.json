@@ -1,5 +1,20 @@
 [
   {
+    "id": "manual-x-men-97-season-2-2026-08-12",
+    "title": "X-Men '97 Season 2",
+    "ratedAt": "2026-08-12",
+    "scores": {
+      "van": 9,
+      "charles": 5,
+      "jomi": 10,
+      "steve": 8
+    },
+    "guests": [],
+    "rawText": "X-MEN '97 SEASON 2\n\nVan 9\nCharles 5\nJomi 10\nSteve 8",
+    "archiveUrl": null,
+    "note": "Ratings provided on the episode release date."
+  },
+  {
     "id": "manual-house-of-the-dragon-season-3-2026-08-10",
     "title": "House of the Dragon Season 3",
     "ratedAt": "2026-08-10",
