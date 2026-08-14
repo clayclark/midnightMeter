@@ -2,7 +2,7 @@
 
 Midnight Meter is an interactive archive of every movie and television rating given by Van Lathan, Charles Holmes, Jomi Adeniran, and Steve Ahlman on *The Midnight Boys* podcast.
 
-[View the live site](https://midnight-meter.vercel.app)
+[View the live site](https://midnightmeter.vercel.app)
 
 ![Midnight Meter site preview](static/midnight-meter-social-v2.png)
 
