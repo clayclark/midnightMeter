@@ -1,5 +1,20 @@
 [
   {
+    "id": "manual-lanterns-season-1-2026-10-04",
+    "title": "Lanterns Season 1",
+    "ratedAt": "2026-10-04",
+    "scores": {
+      "van": 11,
+      "charles": 9,
+      "jomi": 11,
+      "steve": 11
+    },
+    "guests": [],
+    "rawText": "LANTERNS SEASON 1\n\nVan 11\nCharles 9\nJomi 11\nSteve 11",
+    "archiveUrl": null,
+    "note": "Ratings provided on the episode release date."
+  },
+  {
     "id": "manual-x-men-97-season-2-2026-08-12",
     "title": "X-Men '97 Season 2",
     "ratedAt": "2026-08-12",
