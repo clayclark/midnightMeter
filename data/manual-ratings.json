@@ -1,5 +1,35 @@
 [
   {
+    "id": "manual-you-can-see-everything-2026-10-28",
+    "title": "You Can See Everything",
+    "ratedAt": "2026-10-28",
+    "scores": {
+      "van": 12,
+      "charles": 12,
+      "jomi": 12,
+      "steve": 12
+    },
+    "guests": [],
+    "rawText": "YOU CAN SEE EVERYTHING\n\nVan 12\nCharles 12\nJomi 12\nSteve 12",
+    "archiveUrl": "https://www.youtube.com/watch?v=IuatbMc1CVE&t=7265s",
+    "note": "Podcast source; rating segment begins at 2:01:05."
+  },
+  {
+    "id": "manual-clayface-2026-10-28",
+    "title": "Clayface",
+    "ratedAt": "2026-10-28",
+    "scores": {
+      "van": 8,
+      "charles": 2,
+      "jomi": 6,
+      "steve": 7
+    },
+    "guests": [],
+    "rawText": "CLAYFACE\n\nVan 8\nCharles 2\nJomi 6\nSteve 7",
+    "archiveUrl": "https://www.youtube.com/watch?v=IuatbMc1CVE&t=3867s",
+    "note": "Podcast source; rating segment begins at 1:04:27."
+  },
+  {
     "id": "manual-lanterns-season-1-2026-10-04",
     "title": "Lanterns Season 1",
     "ratedAt": "2026-10-04",
