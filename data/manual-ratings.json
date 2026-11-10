@@ -1,5 +1,20 @@
 [
   {
+    "id": "manual-godzilla-minus-zero-2026-11-10",
+    "title": "Godzilla Minus Zero",
+    "ratedAt": "2026-11-10",
+    "scores": {
+      "van": 10,
+      "charles": 10,
+      "jomi": 11,
+      "steve": 10
+    },
+    "guests": [],
+    "rawText": "GODZILLA MINUS ZERO\n\nVan 10\nCharles 10\nJomi 11\nSteve 10",
+    "archiveUrl": "https://www.youtube.com/watch?v=EwslofPVMAs&t=5548s",
+    "note": "Podcast source; rating segment begins at 1:32:28."
+  },
+  {
     "id": "manual-you-can-see-everything-2026-10-28",
     "title": "You Can See Everything",
     "ratedAt": "2026-10-28",
