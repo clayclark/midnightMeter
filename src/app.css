@@ -4,10 +4,12 @@
 /* Metric-matched fallbacks: the local font is scaled to take up the same
    space as the web font, so the swap when the web font arrives doesn't move
    anything (it was the site's entire CLS). Overrides measured from the
-   bundled @fontsource files against Arial, using titles from the archive. */
+   bundled @fontsource files, using titles from the archive. Arial covers
+   Apple and Windows (Liberation Sans shares its metrics on Linux); Android
+   has no Arial, so the Arial faces fail there and the Roboto ones apply. */
 @font-face {
   font-family: 'Anton Fallback';
-  src: local('Arial');
+  src: local('Arial'), local('Liberation Sans');
   size-adjust: 73.84%;
   ascent-override: 159.3%;
   descent-override: 44.57%;
@@ -16,7 +18,7 @@
 
 @font-face {
   font-family: 'Barlow Condensed Fallback';
-  src: local('Arial Bold'), local('Arial-BoldMT');
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold');
   font-weight: 100 900;
   size-adjust: 71.47%;
   ascent-override: 139.93%;
@@ -26,10 +28,38 @@
 
 @font-face {
   font-family: 'Inter Fallback';
-  src: local('Arial');
+  src: local('Arial'), local('Liberation Sans');
   size-adjust: 100.78%;
   ascent-override: 96.12%;
   descent-override: 23.93%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Anton Fallback Roboto';
+  src: local('Roboto'), local('Roboto-Regular');
+  size-adjust: 78.64%;
+  ascent-override: 149.59%;
+  descent-override: 41.85%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Barlow Condensed Fallback Roboto';
+  src: local('Roboto Bold'), local('Roboto-Bold'), local('Roboto');
+  font-weight: 100 900;
+  size-adjust: 76.71%;
+  ascent-override: 130.36%;
+  descent-override: 26.07%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Inter Fallback Roboto';
+  src: local('Roboto'), local('Roboto-Regular');
+  size-adjust: 107.33%;
+  ascent-override: 90.26%;
+  descent-override: 22.47%;
   line-gap-override: 0%;
 }
 

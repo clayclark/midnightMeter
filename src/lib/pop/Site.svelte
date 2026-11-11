@@ -68,9 +68,9 @@
     --host-charles: var(--magenta-on-dark);
     --host-jomi: var(--green);
     --host-steve: var(--yellow);
-    --font-display: 'Anton', 'Anton Fallback', system-ui, sans-serif;
-    --font-ui: 'Barlow Condensed', 'Barlow Condensed Fallback', system-ui, sans-serif;
-    --font-body: 'Inter', 'Inter Fallback', system-ui, sans-serif;
+    --font-display: 'Anton', 'Anton Fallback', 'Anton Fallback Roboto', system-ui, sans-serif;
+    --font-ui: 'Barlow Condensed', 'Barlow Condensed Fallback', 'Barlow Condensed Fallback Roboto', system-ui, sans-serif;
+    --font-body: 'Inter', 'Inter Fallback', 'Inter Fallback Roboto', system-ui, sans-serif;
     background: var(--ink);
     color: var(--cream);
     font-family: var(--font-body);
