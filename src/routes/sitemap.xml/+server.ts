@@ -1,8 +1,17 @@
 import type { RequestHandler } from './$types'
-import { ORIGINAL_RATINGS } from '$lib/data'
+import { MULLIGAN_BY_ID, ORIGINAL_RATINGS } from '$lib/data'
+import { ratingSlug } from '$lib/share'
 
 export const GET: RequestHandler = ({ url }) => {
-  const urls = [{ path: '/', lastmod: ORIGINAL_RATINGS[0].ratedAt }]
+  const ratings = ORIGINAL_RATINGS.map((rating) => {
+    const revisedAt = MULLIGAN_BY_ID.get(rating.id)?.revisedAt
+    return {
+      path: `/ratings/${ratingSlug(rating)}`,
+      lastmod: revisedAt && revisedAt > rating.ratedAt ? revisedAt : rating.ratedAt,
+    }
+  })
+  const newest = ratings.map((r) => r.lastmod).toSorted().at(-1)
+  const urls = [{ path: '/', lastmod: newest }, ...ratings]
   const body = urls
     .map(({ path, lastmod }) => `  <url><loc>${url.origin}${path}</loc><lastmod>${lastmod}</lastmod></url>`)
     .join('\n')

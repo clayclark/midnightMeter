@@ -152,8 +152,10 @@
     requestAnimationFrame(() => requestAnimationFrame(() => {
       const row = document.querySelector<HTMLElement>(`[data-rating-id="${initialOpenId}"]`)
       if (!row) return
-      const stickyBottom = Math.max(controlsEl?.getBoundingClientRect().bottom ?? 0, 0)
-      window.scrollTo({ top: window.scrollY + row.getBoundingClientRect().top - stickyBottom - 8 })
+      /* The row sits below the controls, so once we land they are stuck at
+         top: 0. Their current rect is still the in-flow position. */
+      const stickyHeight = controlsEl?.offsetHeight ?? 0
+      window.scrollTo({ top: window.scrollY + row.getBoundingClientRect().top - stickyHeight - 8 })
     }))
   })
 </script>
