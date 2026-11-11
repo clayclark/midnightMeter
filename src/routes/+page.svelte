@@ -2,8 +2,8 @@
   import { page } from '$app/stores'
   import Site from '$lib/pop/Site.svelte'
 
-  const socialTitle = 'Midnight Meter — The Midnight Boys’ ratings'
-  const description = 'Browse every Midnight Meter score from The Midnight Boys, including year-end Mulligans, collected by a fan.'
+  const title = 'Midnight Meter: Every Midnight Boys Movie and TV Rating'
+  const description = 'Every movie and TV rating from Van Lathan, Charles Holmes, Jomi Adeniran and Steve Ahlman on The Midnight Boys podcast, including year-end Mulligans.'
   $: canonicalUrl = `${$page.url.origin}${$page.url.pathname}`
   // Keep a versioned filename for preview crawlers: X, Messages, Slack, and
   // Discord cache image URLs far longer than the page that references them.
@@ -12,14 +12,14 @@
 </script>
 
 <svelte:head>
-  <title>Midnight Meter</title>
+  <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="theme-color" content="#101418" />
   <link rel="canonical" href={canonicalUrl} />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Midnight Meter" />
   <meta property="og:url" content={canonicalUrl} />
-  <meta property="og:title" content={socialTitle} />
+  <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={socialImage} />
   <meta property="og:image:width" content="1200" />
@@ -27,7 +27,7 @@
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:alt" content="The Midnight Meter with Van, Charles, Jomi, and Steve" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={socialTitle} />
+  <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={socialImage} />
   <meta name="twitter:image:alt" content="The Midnight Meter with Van, Charles, Jomi, and Steve" />
