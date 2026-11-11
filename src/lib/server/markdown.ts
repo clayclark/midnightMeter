@@ -3,7 +3,7 @@ import {
   episodeSourceHref, getAverage, getHostAverage, RATINGS,
 } from '$lib/data'
 import { ratingSlug } from '$lib/share'
-import type { Rating } from '$lib/types'
+import type { HostKey, Rating } from '$lib/types'
 
 const cell = (value: string) => value.replaceAll('|', '\\|')
 const fmt = (n: number) => n.toFixed(2)
@@ -23,10 +23,11 @@ function scoreCells(rating: Rating): string[] {
 /** The whole archive as Markdown, for agents that send `Accept: text/markdown`. */
 export function archiveMarkdown(): string {
   const { total, firstYear, lastYear } = ARCHIVE_SUMMARY
-  const hostRows = HOSTS.map(({ key, name }) => {
-    const count = ORIGINAL_RATINGS.filter((rating) => rating.scores[key] !== null).length
-    return `| ${name} | ${count} | ${fmt(getHostAverage(key, ORIGINAL_RATINGS))} | ${fmt(getHostAverage(key, RATINGS))} |`
-  })
+  /* Some Mulligans give a score to a title the host originally skipped, so
+     each score set gets its own count beside its average. */
+  const scored = (ratings: Rating[], key: HostKey) => ratings.filter((rating) => rating.scores[key] !== null).length
+  const hostRows = HOSTS.map(({ key, name }) =>
+    `| ${name} | ${scored(ORIGINAL_RATINGS, key)} | ${fmt(getHostAverage(key, ORIGINAL_RATINGS))} | ${scored(RATINGS, key)} | ${fmt(getHostAverage(key, RATINGS))} |`)
   const ratingRows = ORIGINAL_RATINGS.map((rating) => {
     const adjusted = adjustedById.get(rating.id) ?? rating
     const guests = rating.guests.map((g) => `${g.name} ${g.score}`).join(', ')
@@ -44,8 +45,8 @@ export function archiveMarkdown(): string {
 
 ## Hosts
 
-| Host | Ratings | Career average | With Mulligans |
-| --- | --- | --- | --- |
+| Host | Ratings | Average | Ratings with Mulligans | Average with Mulligans |
+| --- | --- | --- | --- | --- |
 ${hostRows.join('\n')}
 
 ## Ratings
