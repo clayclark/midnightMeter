@@ -577,5 +577,14 @@
     "timestamp": "1:45:04",
     "changes": { "van": { "from": 7, "to": 3 }, "steve": { "from": 7, "to": 6 } },
     "note": null
+  },
+  {
+    "ratingId": "manual-clayface-2026-10-28",
+    "revisedAt": "2026-11-11",
+    "sourceUrl": "https://youtu.be/bngsocdaFVg",
+    "sourceLabel": "VisionQuest Season 1 Midnight Meter",
+    "timestamp": "1:01:48",
+    "changes": { "van": { "from": 8, "to": 7 } },
+    "note": "Van spent his 2026 mulligan early, during the VisionQuest Season 1 rating."
   }
 ]
