@@ -1,6 +1,38 @@
 /* Global reset + the few primitives both design directions share.
    Everything else lives in scoped component styles. */
 
+/* Metric-matched fallbacks: the local font is scaled to take up the same
+   space as the web font, so the swap when the web font arrives doesn't move
+   anything (it was the site's entire CLS). Overrides measured from the
+   bundled @fontsource files against Arial, using titles from the archive. */
+@font-face {
+  font-family: 'Anton Fallback';
+  src: local('Arial');
+  size-adjust: 73.84%;
+  ascent-override: 159.3%;
+  descent-override: 44.57%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Barlow Condensed Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  font-weight: 100 900;
+  size-adjust: 71.47%;
+  ascent-override: 139.93%;
+  descent-override: 27.99%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  size-adjust: 100.78%;
+  ascent-override: 96.12%;
+  descent-override: 23.93%;
+  line-gap-override: 0%;
+}
+
 *,
 *::before,
 *::after {
