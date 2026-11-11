@@ -2,6 +2,7 @@ import {
   ARCHIVE_SUMMARY, HOSTS, MAX_SCORE, MULLIGAN_BY_ID, ORIGINAL_RATINGS,
   episodeSourceHref, getAverage, getHostAverage, RATINGS,
 } from '$lib/data'
+import { ratingSlug } from '$lib/share'
 import type { HostKey, Rating } from '$lib/types'
 
 const cell = (value: string) => value.replaceAll('|', '\\|')
@@ -31,7 +32,7 @@ export function archiveMarkdown(): string {
     const adjusted = adjustedById.get(rating.id) ?? rating
     const guests = rating.guests.map((g) => `${g.name} ${g.score}`).join(', ')
     const source = episodeSourceHref(rating)
-    return `| ${rating.ratedAt} | ${cell(rating.title)} | ${scoreCells(rating).join(' | ')} | ${fmt(getAverage(adjusted))} | ${cell(guests)} | ${source ? `[Episode](${source})` : ''} |`
+    return `| ${rating.ratedAt} | [${cell(rating.title)}](/ratings/${ratingSlug(rating)}) | ${scoreCells(rating).join(' | ')} | ${fmt(getAverage(adjusted))} | ${cell(guests)} | ${source ? `[Episode](${source})` : ''} |`
   })
 
   return `# Midnight Meter
