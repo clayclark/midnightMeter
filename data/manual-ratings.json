@@ -1,5 +1,20 @@
 [
   {
+    "id": "manual-visionquest-season-1-2026-11-11",
+    "title": "VisionQuest Season 1",
+    "ratedAt": "2026-11-11",
+    "scores": {
+      "van": 9,
+      "charles": 7,
+      "jomi": 9,
+      "steve": 9
+    },
+    "guests": [],
+    "rawText": "VISIONQUEST SEASON 1\n\nVan 9\nCharles 7\nJomi 9\nSteve 9",
+    "archiveUrl": "https://www.youtube.com/watch?v=bngsocdaFVg&t=3696s",
+    "note": "Podcast source; rating segment begins at 1:01:36."
+  },
+  {
     "id": "manual-godzilla-minus-zero-2026-11-10",
     "title": "Godzilla Minus Zero",
     "ratedAt": "2026-11-10",
